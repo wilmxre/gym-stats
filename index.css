@@ -138,5 +138,6 @@
 
 .mesh-gradient-bg {
   background-image: url('./src/assets/mesh-gradient.svg');
+  background-size: cover;
   background-repeat: no-repeat;
 }

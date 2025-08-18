@@ -34,14 +34,18 @@ const calculateStreaks = (checkins: CheckIn[]) => {
 }
 
 const calculateWeeklyFrequency = (checkins: CheckIn[]) => {
-  const now = new Date()
-  const fourWeeksAgo = new Date(now.getTime() - 28 * 24 * 60 * 60 * 1000)
+  if (checkins.length === 0) {
+    return { current: 0 }
+  }
 
-  const last4Weeks = checkins.filter(
-    (checkin) => new Date(checkin.date_checkin) >= fourWeeksAgo
-  ).length
+  const latestDate = new Date(checkins[0].date_checkin)
+  const earliestDate = new Date(checkins[checkins.length - 1].date_checkin)
 
-  const current = Number((last4Weeks / 4).toFixed(1))
+  const totalDays =
+    (latestDate.getTime() - earliestDate.getTime()) / (24 * 60 * 60 * 1000) + 1
+  const totalWeeks = Math.max(1, totalDays / 7)
+
+  const current = Number((checkins.length / totalWeeks).toFixed(1))
 
   return {
     current

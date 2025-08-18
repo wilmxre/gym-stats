@@ -20,7 +20,7 @@ export const KPICard = ({
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <div className="h-10 w-10 bg-primary-600/10 rounded-lg flex items-center justify-center">
-              <Icon className="text-primary-300" />
+              <Icon size={20} className="text-primary-300" />
             </div>
 
             <h3 className="text-md font-semibold text-primary-300 tracking-wide">
@@ -29,7 +29,7 @@ export const KPICard = ({
           </div>
         </div>
 
-        <div>
+        <div className="ml-0.5">
           <div className="text-2xl font-bold text-text-50 leading-tight mb-1">
             {value}
           </div>

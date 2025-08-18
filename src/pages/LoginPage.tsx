@@ -12,7 +12,10 @@ export const LoginPage = () => {
 
   return (
     <div className="min-h-screen mesh-gradient-bg flex items-center justify-center p-4 relative">
-      <ThemeSwitch />
+      <span className="fixed top-8 right-8 z-50 flex items-center gap-2">
+        <ThemeSwitch />
+      </span>
+
       <Toaster
         position="top-right"
         toastOptions={{

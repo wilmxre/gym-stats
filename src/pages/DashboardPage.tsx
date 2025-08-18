@@ -1,22 +1,22 @@
 import { Toaster } from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
 import { HeroKPIDashboard } from '../analytics'
 import { ThemeSwitch } from '../components/ui/theme-switch'
 import { UserMenu } from '../components/ui/user-menu'
 import { useAuth } from '../hooks/useAuth'
 
 export const DashboardPage = () => {
-  const navigate = useNavigate()
-  const { userInfo, handleLogout } = useAuth()
+  const { userInfo } = useAuth()
 
   if (!userInfo) {
     return null
   }
 
   return (
-    <div className="min-h-screen mesh-gradient-bg p-4 relative">
-      <ThemeSwitch />
-      <UserMenu />
+    <div className="min-h-screen bg-background-950 p-4 relative">
+      <span className="fixed top-8 right-8 z-50 flex items-center gap-2">
+        <ThemeSwitch />
+        <UserMenu />
+      </span>
 
       <Toaster
         position="top-right"

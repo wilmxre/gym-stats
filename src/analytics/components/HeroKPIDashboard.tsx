@@ -39,7 +39,7 @@ export const HeroKPIDashboard = () => {
     <div className="mb-8">
       <h2 className="text-2xl font-bold text-text-50 mb-6">Quick Stats</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-background-900/40 backdrop-blur-sm border border-secondary-800/50 p-4 rounded-xl shadow-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <KPICard
           title="Total Check-ins"
           icon={Activity}
