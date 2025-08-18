@@ -1,5 +1,6 @@
 import { Toaster } from 'react-hot-toast'
 import { CoreStatisticsDisplay } from '../components/CoreStatisticsDisplay'
+import { TimeBasedInsightsDisplay } from '../components/TimeBasedInsightsDisplay'
 import { ThemeSwitch } from '../components/ui/theme-switch'
 import { UserMenu } from '../components/ui/user-menu'
 import { useAllCheckins } from '../hooks/useAllCheckins'
@@ -61,7 +62,10 @@ export const CheckInsPage = () => {
       <div className="max-w-screen-xl mx-auto">
         {/* Analytics Section */}
         {!isLoadingAllCheckins && allCheckins.length > 0 && (
-          <CoreStatisticsDisplay checkins={allCheckins} />
+          <>
+            <CoreStatisticsDisplay checkins={allCheckins} />
+            <TimeBasedInsightsDisplay checkins={allCheckins} />
+          </>
         )}
       </div>
     </div>
