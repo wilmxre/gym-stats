@@ -28,7 +28,7 @@ const AppContent = () => {
 
   if (userInfo) {
     return (
-      <div className="min-h-screen gradient-bg flex items-center justify-center p-4 relative">
+      <div className="min-h-screen bg-background-950 flex items-center justify-center p-4 relative">
         <ThemeSwitch />
         <Toaster
           position="top-right"
@@ -41,7 +41,7 @@ const AppContent = () => {
           }}
         />
 
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md bg-background-900 border border-secondary-700">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl text-text-50">
               Welcome Back!
@@ -105,23 +105,22 @@ const AppContent = () => {
   }
 
   return (
-    <div className="min-h-screen gradient-bg flex items-center justify-center p-4 relative">
+    <div className="min-h-screen mesh-gradient-bg flex items-center justify-center p-4 relative">
       <ThemeSwitch />
       <Toaster
         position="top-right"
         toastOptions={{
-          className: 'glass',
           style: {
-            background: 'transparent',
+            background: 'hsl(var(--background-800))',
             color: 'hsl(var(--text-50))',
-            border: '1px solid rgba(255, 255, 255, 0.2)'
+            border: '1px solid hsl(var(--secondary-600))'
           }
         }}
       />
 
-      <Card className="w-full max-w-md glass shadow-2xl">
+      <Card className="w-full max-w-md bg-background-900/95 backdrop-blur-sm border border-secondary-700 shadow-2xl">
         <CardHeader className="text-center pb-6">
-          <div className="w-20 h-20 bg-gradient-to-br from-primary-600 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+          <div className="w-20 h-20 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
             <svg
               width="32"
               height="32"
@@ -138,7 +137,7 @@ const AppContent = () => {
               />
             </svg>
           </div>
-          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
+          <CardTitle className="text-3xl font-bold text-text-50">
             Gym Portal
           </CardTitle>
           <CardDescription className="text-text-400 text-base">
@@ -183,7 +182,7 @@ const AppContent = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-text-50 font-semibold py-2.5 shadow-lg hover:shadow-xl transition-all duration-200"
+              className="w-full bg-primary-600 hover:bg-primary-700 text-text-50 font-semibold py-2.5 shadow-lg hover:shadow-xl transition-all duration-200"
             >
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
