@@ -1,15 +1,8 @@
 import { Toaster } from 'react-hot-toast'
-import { Badge } from '../components/ui/badge'
-import { Button } from '../components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '../components/ui/card'
+import { CoreStatisticsDisplay } from '../components/CoreStatisticsDisplay'
 import { ThemeSwitch } from '../components/ui/theme-switch'
 import { UserMenu } from '../components/ui/user-menu'
+import { useAllCheckins } from '../hooks/useAllCheckins'
 import { useCheckins } from '../hooks/useCheckins'
 
 export const CheckInsPage = () => {
@@ -22,6 +15,8 @@ export const CheckInsPage = () => {
     refreshCheckins,
     goToPage
   } = useCheckins()
+
+  const { allCheckins, isLoading: isLoadingAllCheckins } = useAllCheckins()
 
   const formatDate = (dateString: string) => {
     try {
@@ -63,104 +58,11 @@ export const CheckInsPage = () => {
         }}
       />
 
-      <div className="max-w-4xl mx-auto">
-        <Card className="bg-background-900 border border-secondary-700">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <div>
-              <CardTitle className="text-2xl text-text-50">Check-ins</CardTitle>
-              <CardDescription className="text-primary-400">
-                Your gym visit history ({totalCheckins} total)
-              </CardDescription>
-            </div>
-            <Button
-              onClick={refreshCheckins}
-              disabled={isLoading}
-              variant="outline"
-              className="bg-primary-600 hover:bg-primary-700 text-text-50"
-            >
-              {isLoading ? 'Loading...' : 'Refresh'}
-            </Button>
-          </CardHeader>
-
-          <CardContent>
-            {isLoading && checkins.length === 0 ? (
-              <div className="text-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto"></div>
-                <p className="text-text-400 mt-2">Loading check-ins...</p>
-              </div>
-            ) : checkins.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-text-400">No check-ins found</p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {checkins && checkins?.length > 0 ? (
-                  checkins.map((checkin) => (
-                    <div
-                      key={checkin.id}
-                      className="flex items-center justify-between p-4 bg-secondary-800 rounded-lg border border-secondary-600"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
-                        <div>
-                          <div className="flex items-center gap-3">
-                            <span className="text-text-50 font-medium">
-                              {formatDate(checkin.date_checkin)}
-                            </span>
-                            <Badge variant="secondary" className="text-xs">
-                              {formatTime(checkin.date_checkin)}
-                            </Badge>
-                          </div>
-                          {checkin.club_name && (
-                            <p className="text-text-400 text-sm mt-1">
-                              {checkin.club_name}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <Badge className="bg-primary-600 text-text-50">
-                          Check-in #{checkin.mcid}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-text-400 text-center">
-                    No check-ins available
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex items-center justify-between mt-6 pt-4 border-t border-secondary-700">
-                <p className="text-text-400 text-sm">
-                  Page {currentPage} of {totalPages}
-                </p>
-                <div className="flex gap-2">
-                  <Button
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1 || isLoading}
-                    variant="outline"
-                    size="sm"
-                  >
-                    Previous
-                  </Button>
-                  <Button
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages || isLoading}
-                    variant="outline"
-                    size="sm"
-                  >
-                    Next
-                  </Button>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+      <div className="max-w-screen-xl mx-auto">
+        {/* Analytics Section */}
+        {!isLoadingAllCheckins && allCheckins.length > 0 && (
+          <CoreStatisticsDisplay checkins={allCheckins} />
+        )}
       </div>
     </div>
   )
