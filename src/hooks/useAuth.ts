@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 import { login } from '../api/services/authService'
 
 export interface UserInfo {
@@ -15,10 +16,15 @@ export interface UserInfo {
 }
 
 export const useAuth = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [pincode, setPincode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(() => {
+    // Initialize from localStorage on app start
+    const stored = localStorage.getItem('user_info')
+    return stored ? JSON.parse(stored) : null
+  })
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,6 +44,7 @@ export const useAuth = () => {
 
         setUserInfo(result.member)
         toast.success(`Welcome back, ${result.member.fname}!`)
+        navigate('/dashboard')
       } else {
         toast.error(result.error || 'Login failed')
       }
@@ -55,6 +62,7 @@ export const useAuth = () => {
     setEmail('')
     setPincode('')
     toast.success('Logged out successfully')
+    navigate('/login')
   }
 
   return {

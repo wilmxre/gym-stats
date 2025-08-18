@@ -1,15 +1,38 @@
-import { useAuth } from '../hooks/useAuth'
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes
+} from 'react-router-dom'
 import { ThemeContext, useThemeProvider } from '../hooks/useTheme'
 import { DashboardPage, LoginPage } from '../pages'
+import { ProtectedRoute, PublicRoute } from './ProtectedRoute'
 
 const AppContent = () => {
-  const { userInfo } = useAuth()
-
-  if (userInfo) {
-    return <DashboardPage />
-  }
-
-  return <LoginPage />
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </Router>
+  )
 }
 
 const App = () => {
