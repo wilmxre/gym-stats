@@ -38,8 +38,8 @@ const calculateWeeklyFrequency = (checkins: CheckIn[]) => {
     return { current: 0 }
   }
 
-  const latestDate = new Date(checkins[0].date_checkin)
-  const earliestDate = new Date(checkins[checkins.length - 1].date_checkin)
+  const latestDate = new Date(checkins[checkins.length - 1].date_checkin)
+  const earliestDate = new Date(checkins[0].date_checkin)
 
   const totalDays =
     (latestDate.getTime() - earliestDate.getTime()) / (24 * 60 * 60 * 1000) + 1
@@ -60,7 +60,7 @@ const calculateLastActivity = (checkins: CheckIn[]) => {
     }
   }
 
-  const lastCheckin = checkins[0]
+  const lastCheckin = checkins[checkins.length - 1]
   const lastDate = new Date(lastCheckin.date_checkin)
   const now = new Date()
 
