@@ -23,7 +23,7 @@ export const PublicRoute = ({ children }: PublicRouteProps) => {
   const { userInfo } = useAuth()
 
   if (userInfo) {
-    return <Navigate to="/checkins" replace />
+    return <Navigate to="/dashboard" replace />
   }
 
   return <>{children}</>
