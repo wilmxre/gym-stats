@@ -1,15 +1,13 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { CheckIn, getCheckins } from '../api/services/checkinService'
 
-/**
- * Hook to fetch all checkins for analytics purposes
- * This fetches all pages of checkins data to provide complete statistics
- */
 export const useAllCheckins = () => {
   const [allCheckins, setAllCheckins] = useState<CheckIn[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [total, setTotal] = useState(0)
+
+  const fetchOnce = useRef(false)
 
   const fetchAllCheckins = useCallback(async () => {
     const token = localStorage.getItem('auth_token')
@@ -22,42 +20,29 @@ export const useAllCheckins = () => {
     setIsLoading(true)
 
     try {
-      // First, get the first page to know total pages
-      const firstResult = await getCheckins(token, 1, 50) // Get more per page for efficiency
+      const metadataResult = await getCheckins(token, 1, 1)
 
-      if (!firstResult.success || !firstResult.checkins) {
-        toast.error(firstResult.error || 'Failed to fetch check-ins')
+      if (!metadataResult.success) {
+        toast.error(metadataResult.error || 'Failed to fetch check-ins')
         return
       }
 
-      let allData: CheckIn[] = [...firstResult.checkins]
-      setTotal(firstResult.total || 0)
+      const total = metadataResult.total || 0
+      setTotal(total)
 
-      // If there are more pages, fetch them all
-      const totalPages = firstResult.total_pages || 1
-      if (totalPages > 1) {
-        const promises = []
-        for (let page = 2; page <= totalPages; page++) {
-          promises.push(getCheckins(token, page, 50))
-        }
-
-        const results = await Promise.all(promises)
-
-        for (const result of results) {
-          if (result.success && result.checkins) {
-            allData = [...allData, ...result.checkins]
-          }
-        }
+      if (total === 0) {
+        setAllCheckins([])
+        return
       }
 
-      // Sort by date (newest first)
-      allData.sort(
-        (a, b) =>
-          new Date(b.date_checkin).getTime() -
-          new Date(a.date_checkin).getTime()
-      )
+      const allDataResult = await getCheckins(token, 1, total)
 
-      setAllCheckins(allData)
+      if (!allDataResult.success || !allDataResult.checkins) {
+        toast.error(allDataResult.error || 'Failed to fetch all check-ins')
+        return
+      }
+
+      setAllCheckins(allDataResult.checkins)
     } catch (error) {
       toast.error('Unable to connect to server')
     } finally {
@@ -66,6 +51,11 @@ export const useAllCheckins = () => {
   }, [])
 
   useEffect(() => {
+    if (fetchOnce.current) {
+      return
+    }
+
+    fetchOnce.current = true
     fetchAllCheckins()
   }, [fetchAllCheckins])
 
