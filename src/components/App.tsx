@@ -5,7 +5,7 @@ import {
   Routes
 } from 'react-router-dom'
 import { ThemeContext, useThemeProvider } from '../hooks/useTheme'
-import { CheckInsPage, DashboardPage, LoginPage } from '../pages'
+import { CheckInsPage, LoginPage } from '../pages'
 import { ProtectedRoute, PublicRoute } from './ProtectedRoute'
 
 const AppContent = () => {
@@ -18,14 +18,6 @@ const AppContent = () => {
             <PublicRoute>
               <LoginPage />
             </PublicRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
           }
         />
         <Route

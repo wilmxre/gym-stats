@@ -9,6 +9,7 @@ import {
   CardTitle
 } from '../components/ui/card'
 import { ThemeSwitch } from '../components/ui/theme-switch'
+import { UserMenu } from '../components/ui/user-menu'
 import { useCheckins } from '../hooks/useCheckins'
 
 export const CheckInsPage = () => {
@@ -48,8 +49,9 @@ export const CheckInsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background-950 p-4 relative">
+    <div className="min-h-screen mesh-gradient-bg p-4 relative pt-20">
       <ThemeSwitch />
+      <UserMenu />
       <Toaster
         position="top-right"
         toastOptions={{
