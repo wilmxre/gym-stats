@@ -103,39 +103,23 @@ export const CheckInsPage = () => {
                         <div>
                           <div className="flex items-center gap-3">
                             <span className="text-text-50 font-medium">
-                              {formatDate(checkin.checkin_time)}
+                              {formatDate(checkin.date_checkin)}
                             </span>
                             <Badge variant="secondary" className="text-xs">
-                              {formatTime(checkin.checkin_time)}
+                              {formatTime(checkin.date_checkin)}
                             </Badge>
                           </div>
-                          {checkin.location && (
+                          {checkin.club_name && (
                             <p className="text-text-400 text-sm mt-1">
-                              {checkin.location}
+                              {checkin.club_name}
                             </p>
                           )}
                         </div>
                       </div>
                       <div className="text-right">
-                        {checkin.checkout_time ? (
-                          <div>
-                            <Badge
-                              variant="outline"
-                              className="text-accent-400"
-                            >
-                              Out: {formatTime(checkin.checkout_time)}
-                            </Badge>
-                            {checkin.duration && (
-                              <p className="text-text-400 text-xs mt-1">
-                                Duration: {checkin.duration}
-                              </p>
-                            )}
-                          </div>
-                        ) : (
-                          <Badge className="bg-green-600 text-text-50">
-                            Active
-                          </Badge>
-                        )}
+                        <Badge className="bg-primary-600 text-text-50">
+                          Check-in #{checkin.mcid}
+                        </Badge>
                       </div>
                     </div>
                   ))

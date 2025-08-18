@@ -1,11 +1,20 @@
 export interface CheckIn {
-  id: string
-  member_id: string
-  checkin_time: string
+  id?: string
+  mcid: string
+  date_checkin: string
+  club_name: string
   checkout_time?: string
   duration?: string
-  location?: string
-  activity?: string
+}
+
+export interface CheckInsApiResponse {
+  checkins: Record<string, CheckIn>
+  pagination: {
+    articles_per_page: string
+    page: string
+    total_entries: string
+    total_pages: number
+  }
 }
 
 export interface CheckInsResponse {
@@ -14,6 +23,7 @@ export interface CheckInsResponse {
   total?: number
   page?: number
   articles_per_page?: number
+  total_pages?: number
   error?: string
 }
 
@@ -44,14 +54,22 @@ export const getCheckins = async (
       throw new Error(`HTTP error! status: ${response.status}`)
     }
 
-    const data = await response.json()
+    const data: CheckInsApiResponse = await response.json()
+
+    const checkinsArray = Object.entries(data.checkins || {}).map(
+      ([id, checkin]) => ({
+        ...checkin,
+        id
+      })
+    )
 
     return {
       success: true,
-      checkins: data.checkins || [],
-      total: data.total || 0,
-      page: data.page || page,
-      articles_per_page: data.articles_per_page || articlesPerPage
+      checkins: checkinsArray,
+      total: parseInt(data.pagination?.total_entries || '0'),
+      page: parseInt(data.pagination?.page || '1'),
+      articles_per_page: parseInt(data.pagination?.articles_per_page || '10'),
+      total_pages: data.pagination?.total_pages || 1
     }
   } catch (error) {
     console.error('Get checkins error:', error)
