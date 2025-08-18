@@ -5,7 +5,7 @@ import {
   Routes
 } from 'react-router-dom'
 import { ThemeContext, useThemeProvider } from '../hooks/useTheme'
-import { DashboardPage, LoginPage } from '../pages'
+import { CheckInsPage, DashboardPage, LoginPage } from '../pages'
 import { ProtectedRoute, PublicRoute } from './ProtectedRoute'
 
 const AppContent = () => {
@@ -25,6 +25,14 @@ const AppContent = () => {
           element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkins"
+          element={
+            <ProtectedRoute>
+              <CheckInsPage />
             </ProtectedRoute>
           }
         />

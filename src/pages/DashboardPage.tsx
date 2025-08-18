@@ -1,18 +1,13 @@
 import { Toaster } from 'react-hot-toast'
-import { Badge } from '../components/ui/badge'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '../components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '../components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Label } from '../components/ui/label'
 import { ThemeSwitch } from '../components/ui/theme-switch'
 import { useAuth } from '../hooks/useAuth'
 
 export const DashboardPage = () => {
+  const navigate = useNavigate()
   const { userInfo, handleLogout } = useAuth()
 
   if (!userInfo) {
@@ -35,10 +30,9 @@ export const DashboardPage = () => {
 
       <Card className="w-full max-w-md bg-background-900 border border-secondary-700">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl text-text-50">Welcome Back!</CardTitle>
-          <CardDescription className="text-primary-400">
-            Member Dashboard
-          </CardDescription>
+          <CardTitle className="text-2xl text-text-50">
+            Your information
+          </CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-4">
@@ -76,18 +70,18 @@ export const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="flex justify-center pt-4">
-            <Badge
-              variant="secondary"
-              className="bg-secondary-700 text-accent-400 border-secondary-600"
+          <div className="space-y-3">
+            <Button
+              onClick={() => navigate('/checkins')}
+              variant="default"
+              className="w-full bg-primary-600 hover:bg-primary-700"
             >
-              Active Member
-            </Badge>
+              View Check-ins
+            </Button>
+            <Button onClick={handleLogout} variant="outline" className="w-full">
+              Sign Out
+            </Button>
           </div>
-
-          <Button onClick={handleLogout} variant="outline" className="w-full">
-            Sign Out
-          </Button>
         </CardContent>
       </Card>
     </div>
