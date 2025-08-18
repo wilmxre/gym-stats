@@ -29,17 +29,7 @@ export const DashboardPage = () => {
         }}
       />
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto pt-20">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-text-50 mb-2">
-            Welcome back, {userInfo.fname}!
-          </h1>
-          <p className="text-text-300">Here's your gym performance overview</p>
-        </div>
-
-        {/* Hero KPIs Dashboard */}
         <HeroKPIDashboard />
       </div>
     </div>

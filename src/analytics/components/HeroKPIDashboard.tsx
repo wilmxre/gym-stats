@@ -1,24 +1,16 @@
+import {
+  Activity,
+  Clock,
+  Flame,
+  MapPin,
+  TrendingUp,
+  Trophy
+} from 'lucide-react'
 import { useKPIMetrics } from '../hooks/useKPIMetrics'
 import { KPICard } from './KPICard'
 
 export const HeroKPIDashboard = () => {
-  const { metrics, isLoading, hasData } = useKPIMetrics()
-
-  if (isLoading) {
-    return (
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-text-50 mb-6">Hero KPIs</h2>{' '}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 lg:gap-6">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={index}
-              className="h-44 bg-secondary-800 animate-pulse rounded-lg border border-secondary-700"
-            />
-          ))}
-        </div>
-      </div>
-    )
-  }
+  const { metrics, hasData } = useKPIMetrics()
 
   if (!hasData) {
     return (
@@ -40,82 +32,54 @@ export const HeroKPIDashboard = () => {
     streaks,
     weeklyFrequency,
     lastActivity,
-    favoriteClub,
-    typicalTime
-    // ...existing code...
+    favoriteClub
   } = metrics
-
-  // Determine streak badge color
-  const getStreakBadgeColor = (streak: number) => {
-    if (streak >= 3) return 'green'
-    if (streak >= 1) return 'orange'
-    return 'gray'
-  }
 
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-bold text-text-50 mb-6">Hero KPIs</h2>
+      <h2 className="text-2xl font-bold text-text-50 mb-6">Quick Stats</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 lg:gap-6">
-        {/* Total Check-ins Card */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-background-900/40 backdrop-blur-sm border border-secondary-800/50 p-4 rounded-xl shadow-lg">
         <KPICard
-          title="TOTAL CHECK-INS"
-          icon="💪"
-          mainValue={totalCheckins.lifetime.toLocaleString()}
-          mainLabel="Lifetime"
+          title="Total Check-ins"
+          icon={Activity}
+          value={totalCheckins.lifetime.toLocaleString()}
+          description="Total visits"
         />
 
-        {/* Current Streak Card */}
         <KPICard
-          title="CURRENT STREAK"
-          icon="🔥"
-          mainValue={`${streaks.current}`}
-          mainLabel="Days"
-          badge={
-            streaks.current > 0
-              ? {
-                  color: getStreakBadgeColor(streaks.current),
-                  text: streaks.current >= 3 ? 'Hot!' : 'Good'
-                }
-              : undefined
-          }
+          title="Last Check-in"
+          icon={Clock}
+          value={lastActivity.timeAgo}
+          description={`at ${lastActivity.clubName}`}
         />
 
-        {/* Weekly Average Card */}
         <KPICard
-          title="WEEKLY AVERAGE"
-          icon="📈"
-          mainValue={weeklyFrequency.current}
-          mainLabel="Sessions per week"
+          title="Weekly Average"
+          icon={TrendingUp}
+          value={weeklyFrequency.current}
+          description="Sessions per week"
         />
 
-        {/* Last Check-in Card */}
         <KPICard
-          title="LAST CHECK-IN"
-          icon="⏰"
-          mainValue={lastActivity.timeAgo}
-          mainLabel={lastActivity.clubName}
-          pulse={lastActivity.isRecent}
+          title="Current Streak"
+          icon={Flame}
+          value={`${streaks.current}`}
+          description="Days in a row"
         />
 
-        {/* Favorite Club Card */}
         <KPICard
-          title="FAVORITE CLUB"
-          icon="🏢"
-          mainValue={favoriteClub.name}
-          mainLabel={`${favoriteClub.visits} visits`}
+          title="Best Streak"
+          icon={Trophy}
+          value={`${streaks.longest}`}
+          description="Days in a row"
         />
 
-        {/* Best Streak Card */}
         <KPICard
-          title="BEST STREAK"
-          icon="🏆"
-          mainValue={`${streaks.longest}`}
-          mainLabel="Days"
-          badge={{
-            color: 'gold',
-            text: 'Record'
-          }}
+          title="Favorite Club"
+          icon={MapPin}
+          value={favoriteClub.name}
+          description={`${favoriteClub.visits} visits`}
         />
       </div>
     </div>
