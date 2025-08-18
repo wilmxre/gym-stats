@@ -10,13 +10,13 @@ export const ThemeSwitch = () => {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="fixed top-4 right-4 z-50 bg-background-900/50 hover:bg-background-800/80 backdrop-blur-sm border border-secondary-300/20"
+      className="fixed top-4 right-4 z-50 bg-background-400/50 hover:bg-background-300/60 backdrop-blur-sm border border-secondary-300/20"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? (
-        <Sun className="h-5 w-5 text-accent-400" />
+      {theme === 'light' ? (
+        <Sun className="h-5 w-5 text-primary-500" />
       ) : (
-        <Moon className="h-5 w-5 text-primary-600" />
+        <Moon className="h-5 w-5 text-primary-200" />
       )}
     </Button>
   )

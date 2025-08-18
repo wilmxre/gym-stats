@@ -13,17 +13,21 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(
 
 export const useTheme = () => {
   const context = useContext(ThemeContext)
+
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider')
   }
+
   return context
 }
 
 export const useThemeProvider = () => {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Check localStorage first, then system preference
     const stored = localStorage.getItem('theme') as Theme
-    if (stored) return stored
+
+    if (stored) {
+      return stored
+    }
 
     return window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
@@ -32,8 +36,10 @@ export const useThemeProvider = () => {
 
   useEffect(() => {
     const root = window.document.documentElement
+
     root.classList.remove('light', 'dark')
     root.classList.add(theme)
+
     localStorage.setItem('theme', theme)
   }, [theme])
 
@@ -41,5 +47,8 @@ export const useThemeProvider = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
   }
 
-  return { theme, toggleTheme }
+  return {
+    theme,
+    toggleTheme
+  }
 }

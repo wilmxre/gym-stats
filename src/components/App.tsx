@@ -120,35 +120,15 @@ const AppContent = () => {
 
       <Card className="w-full max-w-md bg-background-900/95 backdrop-blur-sm border border-secondary-700 shadow-2xl">
         <CardHeader className="text-center pb-6">
-          <div className="w-20 h-20 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="text-text-50"
-            >
-              <path
-                d="M12 2L2 7V10C2 16 6 20.5 12 22C18 20.5 22 16 22 10V7L12 2Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
           <CardTitle className="text-3xl font-bold text-text-50">
-            Gym Portal
+            Login
           </CardTitle>
-          <CardDescription className="text-text-400 text-base">
-            Welcome back! Sign in to access your account
-          </CardDescription>
         </CardHeader>
 
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-text-300 font-medium">
+              <Label htmlFor="email" className="text-text-200 font-medium">
                 Email Address
               </Label>
               <Input
@@ -157,14 +137,14 @@ const AppContent = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="bg-background-800/30 border-secondary-600/50 focus:border-primary-500 focus:ring-primary-500/20 placeholder:text-text-500"
+                className="bg-background-800/30 border-secondary-600/50 focus:border-primary-500 focus:ring-primary-500/20 placeholder:text-text-300"
                 required
                 autoComplete="off"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="pincode" className="text-text-300 font-medium">
+              <Label htmlFor="pincode" className="text-text-200 font-medium">
                 PIN Code
               </Label>
               <Input
@@ -173,7 +153,7 @@ const AppContent = () => {
                 value={pincode}
                 onChange={(e) => setPincode(e.target.value)}
                 placeholder="Enter your PIN"
-                className="bg-background-800/30 border-secondary-600/50 focus:border-primary-500 focus:ring-primary-500/20 placeholder:text-text-500"
+                className="bg-background-800/30 border-secondary-600/50 focus:border-primary-500 focus:ring-primary-500/20 placeholder:text-text-300"
                 required
                 autoComplete="new-password"
               />
