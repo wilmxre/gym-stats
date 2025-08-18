@@ -26,75 +26,73 @@ const App = () => {
 
   if (userInfo) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className="min-h-screen bg-background-950 flex items-center justify-center p-4">
         <Toaster
           position="top-right"
           toastOptions={{
             style: {
-              background: '#0b0a0f',
-              color: '#f2f0f5',
-              border: '1px solid #5f3f54'
+              background: 'hsl(224 71.4% 4.1%)',
+              color: 'hsl(210 20% 98%)',
+              border: '1px solid hsl(215 19% 35%)'
             }
           }}
         />
 
-        <Card className="w-full max-w-md bg-background border-secondary">
+        <Card className="w-full max-w-md">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-text">Welcome Back!</CardTitle>
-            <CardDescription className="text-primary">
+            <CardTitle className="text-2xl text-text-50">
+              Welcome Back!
+            </CardTitle>
+            <CardDescription className="text-primary-400">
               Member Dashboard
             </CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-4">
-            <div className="flex items-center gap-3 p-4 bg-secondary/20 rounded-lg border border-secondary">
-              <div className="h-12 w-12 bg-accent rounded-full flex items-center justify-center text-background font-bold text-lg">
+            <div className="flex items-center gap-3 p-4 bg-secondary-800 rounded-lg border border-secondary-600">
+              <div className="h-12 w-12 bg-accent-600 rounded-full flex items-center justify-center text-text-50 font-bold text-lg">
                 {userInfo.fname[0]}
                 {userInfo.lname[0]}
               </div>
               <div>
-                <h3 className="font-semibold text-text">
+                <h3 className="font-semibold text-text-50">
                   {userInfo.fname} {userInfo.lname}
                 </h3>
-                <p className="text-sm text-primary">{userInfo.email}</p>
+                <p className="text-sm text-primary-400">{userInfo.email}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <Label className="text-primary">Member ID</Label>
-                <p className="text-text font-mono">{userInfo.id}</p>
+                <Label className="text-primary-400">Member ID</Label>
+                <p className="text-text-50 font-mono">{userInfo.id}</p>
               </div>
               <div>
-                <Label className="text-primary">Club ID</Label>
-                <p className="text-text font-mono">{userInfo.clubid}</p>
+                <Label className="text-primary-400">Club ID</Label>
+                <p className="text-text-50 font-mono">{userInfo.clubid}</p>
               </div>
               <div>
-                <Label className="text-primary">Location</Label>
-                <p className="text-text">
+                <Label className="text-primary-400">Location</Label>
+                <p className="text-text-50">
                   {userInfo.city}, {userInfo.country}
                 </p>
               </div>
               <div>
-                <Label className="text-primary">Phone</Label>
-                <p className="text-text">{userInfo.mobile_phone}</p>
+                <Label className="text-primary-400">Phone</Label>
+                <p className="text-text-50">{userInfo.mobile_phone}</p>
               </div>
             </div>
 
             <div className="flex justify-center pt-4">
               <Badge
                 variant="secondary"
-                className="bg-secondary/30 text-accent border-secondary"
+                className="bg-secondary-700 text-accent-400 border-secondary-600"
               >
                 Active Member
               </Badge>
             </div>
 
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="w-full border-secondary text-primary hover:bg-secondary/20 hover:text-text"
-            >
+            <Button onClick={handleLogout} variant="outline" className="w-full">
               Sign Out
             </Button>
           </CardContent>
@@ -104,24 +102,24 @@ const App = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background-950 flex items-center justify-center p-4">
       <Toaster
         position="top-right"
         toastOptions={{
           style: {
-            background: '#0b0a0f',
-            color: '#f2f0f5',
-            border: '1px solid #5f3f54'
+            background: 'hsl(224 71.4% 4.1%)',
+            color: 'hsl(210 20% 98%)',
+            border: '1px solid hsl(215 19% 35%)'
           }
         }}
       />
 
-      <Card className="w-full max-w-md bg-background border-secondary">
+      <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl text-text">
+          <CardTitle className="text-2xl text-text-50">
             Gym Member Portal
           </CardTitle>
-          <CardDescription className="text-primary">
+          <CardDescription className="text-primary-400">
             Sign in to access your account
           </CardDescription>
         </CardHeader>
@@ -129,7 +127,7 @@ const App = () => {
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-primary">
+              <Label htmlFor="email" className="text-primary-400">
                 Email
               </Label>
               <Input
@@ -138,14 +136,13 @@ const App = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="bg-secondary/20 border-secondary text-text placeholder:text-primary focus:border-accent"
                 required
                 autoComplete="off"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="pincode" className="text-primary">
+              <Label htmlFor="pincode" className="text-primary-400">
                 PIN Code
               </Label>
               <Input
@@ -154,17 +151,12 @@ const App = () => {
                 value={pincode}
                 onChange={(e) => setPincode(e.target.value)}
                 placeholder="Enter your PIN"
-                className="bg-secondary/20 border-secondary text-text placeholder:text-primary focus:border-accent"
                 required
                 autoComplete="new-password"
               />
             </div>
 
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-accent hover:bg-accent/80 text-background font-semibold"
-            >
+            <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
