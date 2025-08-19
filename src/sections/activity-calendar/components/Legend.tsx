@@ -12,20 +12,6 @@ const LegendItem: React.FC<LegendItemProps> = ({ label, color }) => (
   </>
 )
 
-export const StreakLegend: React.FC = () => (
-  <>
-    <LegendItem label="1 day" color="bg-primary-800" />
-    <span className="ml-2" />
-    <LegendItem label="2 days" color="bg-primary-600" />
-    <span className="ml-2" />
-    <LegendItem label="3 days" color="bg-primary-500" />
-    <span className="ml-2" />
-    <LegendItem label="4 days" color="bg-primary-400" />
-    <span className="ml-2" />
-    <LegendItem label="5+ days" color="bg-accent-500" />
-  </>
-)
-
 export const BinaryLegend: React.FC = () => (
   <>
     <LegendItem label="No visits" color="bg-background-900/50" />

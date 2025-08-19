@@ -22,15 +22,13 @@ const monthOrder = [
 interface CalendarGridProps {
   heatmapData: HeatmapData[]
   dateRange: { start: Date; end: Date }
-  showStreakMode: boolean
 }
 
 export const CalendarGrid: React.FC<CalendarGridProps> = ({
   heatmapData,
-  dateRange,
-  showStreakMode
+  dateRange
 }) => {
-  const { getBinaryColor, getStreakColor } = useCalendarColors()
+  const { getBinaryColor } = useCalendarColors()
 
   const weeks: HeatmapData[][] = []
   let currentWeek: HeatmapData[] = []
@@ -123,17 +121,13 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
                 key={`${weekIndex}-${dayIndex}`}
                 className={clsx(
                   'w-4 h-4 rounded-sm',
-                  showStreakMode
-                    ? getStreakColor(day)
-                    : getBinaryColor(day.hasVisit)
+                  getBinaryColor(day.hasVisit)
                 )}
                 title={
                   day.date
-                    ? showStreakMode && day.streakLength && day.streakLength > 1
-                      ? `${day.date}: Day ${day.streakPosition} of ${day.streakLength}-day streak`
-                      : `${day.date}: ${day.count} ${
-                          day.count === 1 ? 'visit' : 'visits'
-                        }`
+                    ? `${day.date}: ${day.count} ${
+                        day.count === 1 ? 'visit' : 'visits'
+                      }`
                     : ''
                 }
                 style={{ gridColumn: weekIndex + 1, gridRow: dayIndex + 1 }}

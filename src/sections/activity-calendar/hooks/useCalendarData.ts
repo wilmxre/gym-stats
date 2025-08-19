@@ -3,64 +3,36 @@ import { useMemo } from 'react'
 import { useAllCheckins } from '../../../hooks/useAllCheckins'
 import { HeatmapData } from '../types'
 
-const processStreakData = (heatmapData: HeatmapData[]): HeatmapData[] => {
-  const streakData = [...heatmapData]
-  let currentStreakStart = -1
+const calculateStats = (heatmapData: HeatmapData[]) => {
+  const totalCheckins = heatmapData.reduce((sum, day) => sum + day.count, 0)
+  const activeDays = heatmapData.filter((day) => day.count > 0).length
+  const completionRate = Math.round((activeDays / heatmapData.length) * 100)
 
-  for (let i = 0; i < streakData.length; i++) {
-    if (streakData[i].hasVisit) {
-      if (currentStreakStart === -1) {
-        currentStreakStart = i
-      }
-    } else {
-      if (currentStreakStart !== -1) {
-        const streakLength = i - currentStreakStart
-        for (let j = currentStreakStart; j < i; j++) {
-          streakData[j].streakPosition = j - currentStreakStart + 1
-          streakData[j].streakLength = streakLength
-        }
-        currentStreakStart = -1
-      }
-    }
-  }
-
-  if (currentStreakStart !== -1) {
-    const streakLength = streakData.length - currentStreakStart
-    for (let j = currentStreakStart; j < streakData.length; j++) {
-      streakData[j].streakPosition = j - currentStreakStart + 1
-      streakData[j].streakLength = streakLength
-    }
-  }
-
-  return streakData
-}
-
-const calculateStats = (streakData: HeatmapData[]) => {
-  const totalCheckins = streakData.reduce((sum, day) => sum + day.count, 0)
-  const activeDays = streakData.filter((day) => day.count > 0).length
-  const completionRate = Math.round((activeDays / streakData.length) * 100)
-
+  // Calculate streaks
+  let activeStreak = 0
+  let longestStreak = 0
   let currentStreak = 0
-  for (let i = streakData.length - 1; i >= 0; i--) {
-    if (streakData[i].count > 0) {
-      currentStreak++
+
+  // Calculate active streak from the end (most recent days)
+  for (let i = heatmapData.length - 1; i >= 0; i--) {
+    if (heatmapData[i].hasVisit) {
+      activeStreak++
     } else {
       break
     }
   }
 
-  let bestStreak = 0
-  let tempStreak = 0
-  streakData.forEach((day) => {
-    if (day.count > 0) {
-      tempStreak++
-      bestStreak = Math.max(bestStreak, tempStreak)
+  // Calculate longest streak
+  for (const day of heatmapData) {
+    if (day.hasVisit) {
+      currentStreak++
+      longestStreak = Math.max(longestStreak, currentStreak)
     } else {
-      tempStreak = 0
+      currentStreak = 0
     }
-  })
+  }
 
-  return { total: totalCheckins, completionRate, currentStreak, bestStreak }
+  return { total: totalCheckins, completionRate, activeStreak, longestStreak }
 }
 
 export const useCalendarData = (selectedYear: number) => {
@@ -71,7 +43,12 @@ export const useCalendarData = (selectedYear: number) => {
       return {
         heatmapData: [],
         dateRange: { start: new Date(), end: new Date() },
-        stats: { total: 0, completionRate: 0, currentStreak: 0, bestStreak: 0 },
+        stats: {
+          total: 0,
+          completionRate: 0,
+          activeStreak: 0,
+          longestStreak: 0
+        },
         availableYears: [new Date().getFullYear()]
       }
     }
@@ -106,8 +83,8 @@ export const useCalendarData = (selectedYear: number) => {
       return { date: dateKey, count, hasVisit: count > 0 }
     })
 
-    const streakData = processStreakData(heatmapData)
-    const calculatedStats = calculateStats(streakData)
+    const streakData = heatmapData
+    const calculatedStats = calculateStats(heatmapData)
 
     return {
       heatmapData: streakData,

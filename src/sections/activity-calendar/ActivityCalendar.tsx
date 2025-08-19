@@ -4,14 +4,12 @@ import {
   BinaryLegend,
   CalendarGrid,
   StatCard,
-  StreakLegend,
   ToggleButton
 } from './components'
 import { useCalendarData, useCalendarState } from './hooks'
 
 export const ActivityCalendar: React.FC = () => {
-  const { selectedYear, setSelectedYear, showStreakMode, setShowStreakMode } =
-    useCalendarState()
+  const { selectedYear, setSelectedYear } = useCalendarState()
 
   const { heatmapData, dateRange, stats, availableYears, isLoading } =
     useCalendarData(selectedYear)
@@ -37,21 +35,6 @@ export const ActivityCalendar: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <div className="flex gap-1 bg-background-900/30 backdrop-blur-md border border-white/10 shadow-lg rounded-xl p-1.5">
-            <ToggleButton
-              active={!showStreakMode}
-              onClick={() => setShowStreakMode(false)}
-            >
-              Binary
-            </ToggleButton>
-            <ToggleButton
-              active={showStreakMode}
-              onClick={() => setShowStreakMode(true)}
-            >
-              Streak
-            </ToggleButton>
-          </div>
-
-          <div className="flex gap-1 bg-background-900/30 backdrop-blur-md border border-white/10 shadow-lg rounded-xl p-1.5">
             {availableYears.map((year) => (
               <ToggleButton
                 key={year}
@@ -65,20 +48,16 @@ export const ActivityCalendar: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard value={stats.total} label="Total visits" />
         <StatCard value={`${stats.completionRate}%`} label="Completion rate" />
-        <StatCard value={stats.currentStreak} label="Current streak" />
-        <StatCard value={stats.bestStreak} label="Best streak" />
+        <StatCard value={stats.activeStreak} label="Active streak" />
+        <StatCard value={stats.longestStreak} label="Longest streak" />
       </div>
 
       <div className="p-6 bg-background-900/30 backdrop-blur-md border border-white/10 shadow-lg rounded-xl">
         <div className="overflow-x-auto">
-          <CalendarGrid
-            heatmapData={heatmapData}
-            dateRange={dateRange}
-            showStreakMode={showStreakMode}
-          />
+          <CalendarGrid heatmapData={heatmapData} dateRange={dateRange} />
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-4 gap-4">
@@ -87,7 +66,7 @@ export const ActivityCalendar: React.FC = () => {
             {format(dateRange.end, 'MMM d, yyyy')}
           </div>
           <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
-            {showStreakMode ? <StreakLegend /> : <BinaryLegend />}
+            <BinaryLegend />
           </div>
         </div>
       </div>
