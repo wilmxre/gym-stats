@@ -1,8 +1,67 @@
 import { eachDayOfInterval, endOfYear, format, startOfYear } from 'date-fns'
 import { useMemo } from 'react'
-import { useAllCheckins } from '../../hooks/useAllCheckins'
-import { HeatmapData } from './types'
-import { calculateStats, processStreakData } from './utils'
+import { useAllCheckins } from '../../../hooks/useAllCheckins'
+import { HeatmapData } from '../types'
+
+const processStreakData = (heatmapData: HeatmapData[]): HeatmapData[] => {
+  const streakData = [...heatmapData]
+  let currentStreakStart = -1
+
+  for (let i = 0; i < streakData.length; i++) {
+    if (streakData[i].hasVisit) {
+      if (currentStreakStart === -1) {
+        currentStreakStart = i
+      }
+    } else {
+      if (currentStreakStart !== -1) {
+        const streakLength = i - currentStreakStart
+        for (let j = currentStreakStart; j < i; j++) {
+          streakData[j].streakPosition = j - currentStreakStart + 1
+          streakData[j].streakLength = streakLength
+        }
+        currentStreakStart = -1
+      }
+    }
+  }
+
+  if (currentStreakStart !== -1) {
+    const streakLength = streakData.length - currentStreakStart
+    for (let j = currentStreakStart; j < streakData.length; j++) {
+      streakData[j].streakPosition = j - currentStreakStart + 1
+      streakData[j].streakLength = streakLength
+    }
+  }
+
+  return streakData
+}
+
+const calculateStats = (streakData: HeatmapData[]) => {
+  const totalCheckins = streakData.reduce((sum, day) => sum + day.count, 0)
+  const activeDays = streakData.filter((day) => day.count > 0).length
+  const completionRate = Math.round((activeDays / streakData.length) * 100)
+
+  let currentStreak = 0
+  for (let i = streakData.length - 1; i >= 0; i--) {
+    if (streakData[i].count > 0) {
+      currentStreak++
+    } else {
+      break
+    }
+  }
+
+  let bestStreak = 0
+  let tempStreak = 0
+  streakData.forEach((day) => {
+    if (day.count > 0) {
+      tempStreak++
+      bestStreak = Math.max(bestStreak, tempStreak)
+    } else {
+      tempStreak = 0
+    }
+  })
+
+  return { total: totalCheckins, completionRate, currentStreak, bestStreak }
+}
 
 export const useCalendarData = (selectedYear: number) => {
   const { allCheckins, isLoading } = useAllCheckins()

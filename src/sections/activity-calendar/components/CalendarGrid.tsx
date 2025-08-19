@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { addDays, eachDayOfInterval, format, getDay, subDays } from 'date-fns'
 import React from 'react'
-import { HeatmapData } from './types'
-import { getBinaryColor, getStreakColor } from './utils'
+import { useCalendarColors } from '../hooks'
+import { HeatmapData } from '../types'
 
 const monthOrder = [
   'Jan',
@@ -30,6 +30,8 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
   dateRange,
   showStreakMode
 }) => {
+  const { getBinaryColor, getStreakColor } = useCalendarColors()
+
   const weeks: HeatmapData[][] = []
   let currentWeek: HeatmapData[] = []
 
@@ -85,7 +87,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
         {monthLabels.map(({ month, position }) => (
           <span
             key={`${month}-${position}`}
-            className="absolute text-xs font-medium text-text-950"
+            className="absolute text-xs font-medium text-text-200"
             style={{
               left: `${position * 20}px`,
               transform: 'translateX(-50%)'
@@ -98,7 +100,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
 
       <div className="flex gap-3">
         <div
-          className="flex flex-col justify-start text-xs text-text-950 w-10"
+          className="flex flex-col justify-start text-xs text-text-200 w-10"
           style={{ height: `${7 * 20}px` }}
         >
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
@@ -120,7 +122,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
               <div
                 key={`${weekIndex}-${dayIndex}`}
                 className={clsx(
-                  'w-4 h-4 rounded-sm border border-transparent',
+                  'w-4 h-4 rounded-sm border border-secondary-700',
                   showStreakMode
                     ? getStreakColor(day)
                     : getBinaryColor(day.hasVisit)

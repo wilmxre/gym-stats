@@ -1,18 +1,24 @@
 import clsx from 'clsx'
 import React from 'react'
 
-export const ToggleButton: React.FC<{
+interface ToggleButtonProps {
   active: boolean
   onClick: () => void
   children: React.ReactNode
-}> = ({ active, onClick, children }) => (
+}
+
+export const ToggleButton: React.FC<ToggleButtonProps> = ({
+  active,
+  onClick,
+  children
+}) => (
   <button
     onClick={onClick}
     className={clsx(
       'px-3 py-2 text-sm font-medium rounded-md transition-colors',
       active
-        ? 'bg-primary-300 text-text-950 shadow-sm'
-        : 'text-text-900 hover:text-text-950'
+        ? 'bg-background-700 text-text-50 shadow-sm'
+        : 'text-text-300 hover:text-text-50'
     )}
   >
     {children}
