@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { addDays, eachDayOfInterval, format, getDay, subDays } from 'date-fns'
 import React from 'react'
-import { useCalendarColors } from '../hooks'
 import { HeatmapData } from '../types'
 
 const monthOrder = [
@@ -28,8 +27,6 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
   heatmapData,
   dateRange
 }) => {
-  const { getBinaryColor } = useCalendarColors()
-
   const weeks: HeatmapData[][] = []
   let currentWeek: HeatmapData[] = []
 
@@ -121,7 +118,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
                 key={`${weekIndex}-${dayIndex}`}
                 className={clsx(
                   'w-4 h-4 rounded-sm',
-                  getBinaryColor(day.hasVisit)
+                  day.hasVisit ? 'bg-accent-500' : 'bg-background-900/30'
                 )}
                 title={
                   day.date

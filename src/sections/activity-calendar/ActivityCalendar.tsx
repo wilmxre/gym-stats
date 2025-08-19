@@ -6,13 +6,18 @@ import {
   StatCard,
   ToggleButton
 } from './components'
-import { useCalendarData, useCalendarState } from './hooks'
+import { useCalendarData } from './hooks'
 
 export const ActivityCalendar: React.FC = () => {
-  const { selectedYear, setSelectedYear } = useCalendarState()
-
-  const { heatmapData, dateRange, stats, availableYears, isLoading } =
-    useCalendarData(selectedYear)
+  const {
+    selectedYear,
+    setSelectedYear,
+    heatmapData,
+    dateRange,
+    stats,
+    availableYears,
+    isLoading
+  } = useCalendarData()
 
   if (isLoading) {
     return (
