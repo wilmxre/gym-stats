@@ -82,14 +82,14 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
   })
 
   return (
-    <div className="space-y-4 min-w-[800px]">
-      <div className="relative h-6 ml-14">
+    <div className="space-y-2 min-w-[800px]">
+      <div className="relative h-8 ml-12">
         {monthLabels.map(({ month, position }) => (
           <span
             key={`${month}-${position}`}
-            className="absolute text-xs font-medium text-text-200"
+            className="absolute text-sm font-semibold text-text-100"
             style={{
-              left: `${position * 20}px`,
+              left: `${position * 20 + 10}px`,
               transform: 'translateX(-50%)'
             }}
           >
@@ -100,7 +100,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
 
       <div className="flex gap-3">
         <div
-          className="flex flex-col justify-start text-xs text-text-200 w-10"
+          className="flex flex-col justify-start font-semibold text-xs text-text-100 w-12"
           style={{ height: `${7 * 20}px` }}
         >
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (

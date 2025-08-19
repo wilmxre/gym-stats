@@ -30,13 +30,13 @@ export const ActivityCalendar: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-text-50">Activity Calendar</h2>
-          <p className="text-text-200 mt-1">
+          <p className="text-text-100 mt-1">
             Your gym check-in history for {selectedYear}
           </p>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex gap-1 bg-background-800 p-1 rounded-xl">
+          <div className="flex gap-1 bg-background-900/30 backdrop-blur-md border border-white/10 shadow-lg rounded-xl p-1.5">
             <ToggleButton
               active={!showStreakMode}
               onClick={() => setShowStreakMode(false)}
@@ -51,7 +51,7 @@ export const ActivityCalendar: React.FC = () => {
             </ToggleButton>
           </div>
 
-          <div className="flex gap-1 bg-background-800 p-1 rounded-xl">
+          <div className="flex gap-1 bg-background-900/30 backdrop-blur-md border border-white/10 shadow-lg rounded-xl p-1.5">
             {availableYears.map((year) => (
               <ToggleButton
                 key={year}
@@ -72,7 +72,7 @@ export const ActivityCalendar: React.FC = () => {
         <StatCard value={stats.bestStreak} label="Best streak" />
       </div>
 
-      <div className="bg-background-900 p-6 rounded-xl">
+      <div className="p-6 bg-background-900/30 backdrop-blur-md border border-white/10 shadow-lg rounded-xl">
         <div className="overflow-x-auto">
           <CalendarGrid
             heatmapData={heatmapData}

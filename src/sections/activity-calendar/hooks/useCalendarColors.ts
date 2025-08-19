@@ -2,7 +2,7 @@ import { HeatmapData } from '../types'
 
 export const useCalendarColors = () => {
   const getBinaryColor = (hasVisit: boolean): string => {
-    return hasVisit ? 'bg-primary-500' : 'bg-background-800'
+    return hasVisit ? 'bg-accent-500' : 'bg-background-900/50'
   }
 
   const getStreakColor = (day: HeatmapData): string => {

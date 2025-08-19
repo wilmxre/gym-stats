@@ -7,7 +7,7 @@ interface LegendItemProps {
 
 const LegendItem: React.FC<LegendItemProps> = ({ label, color }) => (
   <>
-    <span className="text-sm text-text-200 whitespace-nowrap">{label}:</span>
+    <span className="text-sm text-text-100 whitespace-nowrap">{label}:</span>
     <div className={`w-4 h-4 rounded-sm ${color} flex-shrink-0`} />
   </>
 )
@@ -28,7 +28,7 @@ export const StreakLegend: React.FC = () => (
 
 export const BinaryLegend: React.FC = () => (
   <>
-    <LegendItem label="No visits" color="bg-background-800" />
-    <LegendItem label="Has visits" color="bg-primary-500" />
+    <LegendItem label="No visits" color="bg-background-900/50" />
+    <LegendItem label="Has visits" color="bg-accent-500" />
   </>
 )
