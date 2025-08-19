@@ -1,4 +1,4 @@
-export { CalendarGrid } from './CalendarGrid'
-export { BinaryLegend } from './Legend'
-export { StatCard } from './StatCard'
-export { ToggleButton } from './ToggleButton'
+export { CalendarGrid } from './calendar-grid'
+export { BinaryLegend } from './legend'
+export { StatCard } from './stat-card'
+export { ToggleButton } from './toggle-button'
