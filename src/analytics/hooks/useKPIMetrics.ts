@@ -7,7 +7,7 @@ import { calculateKPIMetrics } from '../utils/kpiCalculations'
  * Hook to calculate and return KPI metrics for the dashboard
  */
 export const useKPIMetrics = (): {
-  metrics: KPIMetrics
+  metrics: KPIMetrics | null
   isLoading: boolean
   hasData: boolean
 } => {

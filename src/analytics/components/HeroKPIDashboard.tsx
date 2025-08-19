@@ -12,17 +12,11 @@ import { KPICard } from './KPICard'
 export const HeroKPIDashboard = () => {
   const { metrics, hasData } = useKPIMetrics()
 
-  if (!hasData) {
+  if (!hasData || !metrics) {
     return (
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-text-50 mb-6">Hero KPIs</h2>
-        <div className="text-center py-12 text-text-400 bg-background-900 rounded-lg border border-secondary-700">
-          <div className="text-6xl mb-4">📊</div>
-          <p className="text-lg font-medium mb-2">No check-in data available</p>
-          <p className="text-sm">
-            Start tracking your gym visits to see your performance metrics
-          </p>
-        </div>
+        <h2 className="text-2xl font-bold text-text-50 mb-6">Quick Stats</h2>
+        <p className="text-md font-medium mb-2">No check-in data available</p>
       </div>
     )
   }

@@ -1,9 +1,9 @@
 import { CheckIn } from '../../api/services/checkinService'
 import { KPIMetrics } from '../types'
 
-export const calculateKPIMetrics = (checkins: CheckIn[]): KPIMetrics => {
+export const calculateKPIMetrics = (checkins: CheckIn[]): KPIMetrics | null => {
   if (checkins.length === 0) {
-    return getEmptyMetrics()
+    return null
   }
 
   return {
@@ -97,17 +97,6 @@ const calculateFavoriteClub = (checkins: CheckIn[]) => {
     visits: favoriteVisits
   }
 }
-
-const getEmptyMetrics = (): KPIMetrics => ({
-  totalCheckins: { lifetime: 0 },
-  streaks: { current: 0, longest: 0 },
-  weeklyFrequency: { current: 0 },
-  lastActivity: {
-    timeAgo: 'Never',
-    clubName: ''
-  },
-  favoriteClub: { name: 'No data', visits: 0 }
-})
 
 const getUniqueCheckinDates = (checkins: CheckIn[]): string[] => {
   const dates = new Set(

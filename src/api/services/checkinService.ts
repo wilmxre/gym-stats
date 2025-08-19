@@ -39,7 +39,7 @@ export const getCheckins = async (
     formData.append('articles_per_page', articlesPerPage.toString())
 
     const response = await fetch(
-      'https://api.upfit.cloud/member-get-checkins.php?json=null',
+      'https://api.upfit.cloud/member-get-checkins.php',
       {
         method: 'POST',
         headers: {
