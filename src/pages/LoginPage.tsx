@@ -1,14 +1,23 @@
 import { Toaster } from 'react-hot-toast'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
+import { Checkbox } from '../components/ui/checkbox'
 import { Input } from '../components/ui/input'
 import { Label } from '../components/ui/label'
 import { ThemeSwitch } from '../components/ui/theme-switch'
 import { useAuth } from '../hooks/useAuth'
 
 export const LoginPage = () => {
-  const { email, setEmail, pincode, setPincode, isLoading, handleLogin } =
-    useAuth()
+  const {
+    email,
+    setEmail,
+    pincode,
+    setPincode,
+    rememberCredentials,
+    setRememberCredentials,
+    isLoading,
+    handleLogin
+  } = useAuth()
 
   return (
     <div className="min-h-screen mesh-gradient-bg flex items-center justify-center p-4 relative">
@@ -66,6 +75,23 @@ export const LoginPage = () => {
                 required
                 autoComplete="new-password"
               />
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="remember"
+                checked={rememberCredentials}
+                onCheckedChange={(checked) =>
+                  setRememberCredentials(checked === true)
+                }
+                className="border-secondary-600/50 data-[state=checked]:bg-primary-600 data-[state=checked]:border-primary-600"
+              />
+              <Label
+                htmlFor="remember"
+                className="text-sm font-medium text-text-200 cursor-pointer"
+              >
+                Remember my credentials
+              </Label>
             </div>
 
             <Button

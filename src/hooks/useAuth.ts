@@ -17,8 +17,17 @@ export interface UserInfo {
 
 export const useAuth = () => {
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [pincode, setPincode] = useState('')
+  const [email, setEmail] = useState(() => {
+    // Initialize from localStorage if credentials are remembered
+    return localStorage.getItem('remembered_email') || ''
+  })
+  const [pincode, setPincode] = useState(() => {
+    // Initialize from localStorage if credentials are remembered
+    return localStorage.getItem('remembered_pincode') || ''
+  })
+  const [rememberCredentials, setRememberCredentials] = useState(() => {
+    return localStorage.getItem('remember_credentials') === 'true'
+  })
   const [isLoading, setIsLoading] = useState(false)
   const [userInfo, setUserInfo] = useState<UserInfo | null>(() => {
     // Initialize from localStorage on app start
@@ -42,6 +51,17 @@ export const useAuth = () => {
         localStorage.setItem('auth_token', result.token)
         localStorage.setItem('user_info', JSON.stringify(result.member))
 
+        // Handle remember credentials
+        if (rememberCredentials) {
+          localStorage.setItem('remembered_email', email)
+          localStorage.setItem('remembered_pincode', pincode)
+          localStorage.setItem('remember_credentials', 'true')
+        } else {
+          localStorage.removeItem('remembered_email')
+          localStorage.removeItem('remembered_pincode')
+          localStorage.removeItem('remember_credentials')
+        }
+
         setUserInfo(result.member)
         toast.success(`Welcome back, ${result.member.fname}!`)
         navigate('/sandbox')
@@ -59,8 +79,16 @@ export const useAuth = () => {
     localStorage.removeItem('auth_token')
     localStorage.removeItem('user_info')
     setUserInfo(null)
-    setEmail('')
-    setPincode('')
+
+    // Only clear credentials if "remember" is not checked
+    if (!rememberCredentials) {
+      setEmail('')
+      setPincode('')
+      localStorage.removeItem('remembered_email')
+      localStorage.removeItem('remembered_pincode')
+      localStorage.removeItem('remember_credentials')
+    }
+
     toast.success('Logged out successfully')
     navigate('/login')
   }
@@ -70,6 +98,8 @@ export const useAuth = () => {
     setEmail,
     pincode,
     setPincode,
+    rememberCredentials,
+    setRememberCredentials,
     isLoading,
     userInfo,
     handleLogin,
