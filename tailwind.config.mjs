@@ -6,6 +6,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        hex: {
+          text: 'hsl(264, 20%, 95%)',
+          background: 'hsl(252, 20%, 5%)',
+          primary: 'hsl(262, 20%, 75%)',
+          secondary: 'hsl(321, 20%, 31%)',
+          accent: 'hsl(340, 21%, 58%)'
+        },
         text: {
           50: 'hsl(var(--text-50))',
           100: 'hsl(var(--text-100))',
