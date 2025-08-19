@@ -2,22 +2,22 @@ import { HeatmapData } from './types'
 
 export const getBinaryColor = (hasVisit: boolean): string => {
   return hasVisit
-    ? 'bg-green-500 dark:bg-green-600'
-    : 'bg-gray-100 dark:bg-gray-800'
+    ? 'bg-primary-700 dark:bg-primary-700'
+    : 'bg-background-400/75 dark:bg-background-400/75'
 }
 
 export const getStreakColor = (day: HeatmapData): string => {
-  if (!day.hasVisit) return 'bg-gray-100 dark:bg-gray-800'
+  if (!day.hasVisit) return 'bg-background-800'
 
   const streakLength = day.streakLength || 1
 
-  if (streakLength === 1) return 'bg-green-100 dark:bg-green-200'
-  if (streakLength === 2) return 'bg-green-300 dark:bg-green-400'
-  if (streakLength === 3) return 'bg-green-500 dark:bg-green-600'
-  if (streakLength === 4) return 'bg-green-700 dark:bg-green-800'
-  if (streakLength >= 5) return 'bg-yellow-400 dark:bg-yellow-400'
+  if (streakLength === 1) return 'bg-primary-800'
+  if (streakLength === 2) return 'bg-primary-600'
+  if (streakLength === 3) return 'bg-primary-500'
+  if (streakLength === 4) return 'bg-primary-400'
+  if (streakLength >= 5) return 'bg-accent-500'
 
-  return 'bg-green-500 dark:bg-green-600'
+  return 'bg-primary-500'
 }
 
 export const processStreakData = (

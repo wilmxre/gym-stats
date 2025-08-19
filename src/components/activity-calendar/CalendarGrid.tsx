@@ -4,6 +4,21 @@ import React from 'react'
 import { HeatmapData } from './types'
 import { getBinaryColor, getStreakColor } from './utils'
 
+const monthOrder = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
+]
+
 interface CalendarGridProps {
   heatmapData: HeatmapData[]
   dateRange: { start: Date; end: Date }
@@ -43,6 +58,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
 
   const monthLabels: { month: string; position: number }[] = []
   const monthPositions = new Map<string, number>()
+
   weeks.forEach((week, weekIndex) => {
     week.forEach((day) => {
       if (day.date) {
@@ -57,20 +73,6 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
     })
   })
 
-  const monthOrder = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ]
   monthOrder.forEach((month) => {
     if (monthPositions.has(month)) {
       monthLabels.push({ month, position: monthPositions.get(month)! })
@@ -83,7 +85,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
         {monthLabels.map(({ month, position }) => (
           <span
             key={`${month}-${position}`}
-            className="absolute text-xs font-medium text-gray-500 dark:text-gray-400"
+            className="absolute text-xs font-medium text-text-950"
             style={{
               left: `${position * 20}px`,
               transform: 'translateX(-50%)'
@@ -96,7 +98,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
 
       <div className="flex gap-3">
         <div
-          className="flex flex-col justify-start text-xs text-gray-500 dark:text-gray-400 w-10"
+          className="flex flex-col justify-start text-xs text-text-950 w-10"
           style={{ height: `${7 * 20}px` }}
         >
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
@@ -118,7 +120,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
               <div
                 key={`${weekIndex}-${dayIndex}`}
                 className={clsx(
-                  'w-4 h-4 rounded-sm border border-gray-200 dark:border-gray-700',
+                  'w-4 h-4 rounded-sm border border-transparent',
                   showStreakMode
                     ? getStreakColor(day)
                     : getBinaryColor(day.hasVisit)
