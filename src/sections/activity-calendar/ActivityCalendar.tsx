@@ -33,7 +33,7 @@ export const ActivityCalendar: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-text-50">Activity Calendar</h2>
-          <p className="text-text-100 mt-1">
+          <p className="text-text-50 font-medium mt-1">
             Your gym check-in history for {selectedYear}
           </p>
         </div>
