@@ -36,7 +36,7 @@ export const ActivityCalendar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex gap-1 bg-background-800 p-1 rounded-lg">
+          <div className="flex gap-1 bg-background-800 p-1 rounded-xl">
             <ToggleButton
               active={!showStreakMode}
               onClick={() => setShowStreakMode(false)}
@@ -51,7 +51,7 @@ export const ActivityCalendar: React.FC = () => {
             </ToggleButton>
           </div>
 
-          <div className="flex gap-1 bg-background-800 p-1 rounded-lg">
+          <div className="flex gap-1 bg-background-800 p-1 rounded-xl">
             {availableYears.map((year) => (
               <ToggleButton
                 key={year}
@@ -72,7 +72,7 @@ export const ActivityCalendar: React.FC = () => {
         <StatCard value={stats.bestStreak} label="Best streak" />
       </div>
 
-      <div className="bg-background-900 p-6 rounded-lg border border-secondary-700">
+      <div className="bg-background-900 p-6 rounded-xl">
         <div className="overflow-x-auto">
           <CalendarGrid
             heatmapData={heatmapData}
@@ -81,7 +81,7 @@ export const ActivityCalendar: React.FC = () => {
           />
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-4 border-t border-secondary-700 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-4 gap-4">
           <div className="text-sm text-text-200">
             {format(dateRange.start, 'MMM d, yyyy')} -{' '}
             {format(dateRange.end, 'MMM d, yyyy')}

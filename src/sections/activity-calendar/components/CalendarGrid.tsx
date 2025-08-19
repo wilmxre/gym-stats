@@ -83,7 +83,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
 
   return (
     <div className="space-y-4 min-w-[800px]">
-      <div className="relative h-6" style={{ marginLeft: '52px' }}>
+      <div className="relative h-6 ml-14">
         {monthLabels.map(({ month, position }) => (
           <span
             key={`${month}-${position}`}
@@ -122,7 +122,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
               <div
                 key={`${weekIndex}-${dayIndex}`}
                 className={clsx(
-                  'w-4 h-4 rounded-sm border border-secondary-700',
+                  'w-4 h-4 rounded-sm',
                   showStreakMode
                     ? getStreakColor(day)
                     : getBinaryColor(day.hasVisit)
