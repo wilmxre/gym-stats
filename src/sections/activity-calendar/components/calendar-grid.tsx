@@ -118,7 +118,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
                 key={`${weekIndex}-${dayIndex}`}
                 className={clsx(
                   'w-4 h-4 rounded-sm',
-                  day.hasVisit ? 'bg-accent-500' : 'bg-background-900/40'
+                  day.hasVisit ? 'bg-accent-500' : 'bg-primary-900/30'
                 )}
                 title={
                   day.date

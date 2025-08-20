@@ -18,7 +18,7 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
       'px-3 py-2 text-sm font-medium rounded-xl transition-colors focus:outline-none focus:ring-0',
       active
         ? 'backdrop-blur-md border border-accent-300/30 text-text-50 shadow-sm'
-        : 'text-text-300 hover:text-text-50'
+        : 'text-text-200 hover:text-text-50'
     )}
   >
     {children}

@@ -14,7 +14,7 @@ const LegendItem: React.FC<LegendItemProps> = ({ label, color }) => (
 
 export const BinaryLegend: React.FC = () => (
   <>
-    <LegendItem label="No visits" color="bg-background-900/40" />
+    <LegendItem label="No visits" color="bg-primary-900/30" />
     <LegendItem label="Has visits" color="bg-accent-500" />
   </>
 )

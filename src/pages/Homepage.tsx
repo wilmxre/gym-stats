@@ -5,7 +5,7 @@ import { CheckinsProvider } from '../contexts/CheckinsContext'
 export const Homepage = () => {
   return (
     <div className="min-h-screen mesh-gradient-bg p-8">
-      <span className="fixed top-10 right-10 z-50 flex items-center gap-2">
+      <span className="fixed top-6 right-6 z-50 flex items-center gap-2">
         <UserMenu />
       </span>
 

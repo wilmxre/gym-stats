@@ -27,7 +27,7 @@ export const UserMenu = () => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="bg-background-900/40 backdrop-blur-md border border-accent-300/30 shadow-lg rounded-xl hover:bg-background-700/30"
+        className="bg-background-900/50 backdrop-blur-md border border-accent-300/30 shadow-lg rounded-xl hover:bg-background-900/60"
         aria-label="User menu"
       >
         <Menu className="h-5 w-5 text-primary-100" />
@@ -40,7 +40,7 @@ export const UserMenu = () => {
             onClick={() => setIsOpen(false)}
           />
 
-          <Card className="fixed top-16 right-4 z-50 w-80 bg-background-900/90 backdrop-blur-sm border border-secondary-700 shadow-2xl">
+          <Card className="fixed right-6 z-50 w-80 bg-background-900/80 backdrop-blur-sm border border-accent-300/30 shadow-2xl">
             <CardHeader className="text-center pb-4">
               <div className="w-16 h-16 bg-accent-600 rounded-full flex items-center justify-center mx-auto mb-3">
                 <span className="text-text-50 font-bold text-xl">
@@ -51,7 +51,7 @@ export const UserMenu = () => {
               <CardTitle className="text-xl text-text-50">
                 {userInfo.fname} {userInfo.lname}
               </CardTitle>
-              <CardDescription className="text-primary-400">
+              <CardDescription className="text-accent-200">
                 {userInfo.email}
               </CardDescription>
             </CardHeader>
@@ -59,23 +59,20 @@ export const UserMenu = () => {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div>
-                  <Label className="text-primary-400">Member ID</Label>
+                  <Label className="text-accent-200">Member ID</Label>
                   <p className="text-text-50 font-mono">{userInfo.id}</p>
                 </div>
                 <div>
-                  <Label className="text-primary-400">Club ID</Label>
+                  <Label className="text-accent-200">Club ID</Label>
                   <p className="text-text-50 font-mono">{userInfo.clubid}</p>
                 </div>
-                <div>
-                  <Label className="text-primary-400">Location</Label>
-                  <p className="text-text-50">
-                    {userInfo.city}, {userInfo.country}
-                  </p>
-                </div>
-                <div>
-                  <Label className="text-primary-400">Phone</Label>
-                  <p className="text-text-50">{userInfo.mobile_phone}</p>
-                </div>
+              </div>
+
+              <div>
+                <Label className="text-accent-200">Location</Label>
+                <p className="text-text-50">
+                  {userInfo.city}, {userInfo.country}
+                </p>
               </div>
 
               <Button
@@ -83,8 +80,7 @@ export const UserMenu = () => {
                   handleLogout()
                   setIsOpen(false)
                 }}
-                variant="outline"
-                className="w-full flex items-center gap-2"
+                className="w-full"
               >
                 <LogOut className="h-4 w-4" />
                 Sign Out
