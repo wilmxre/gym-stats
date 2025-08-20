@@ -1,17 +1,12 @@
 {
-  "name": "reactjs-vite-tailwindcss-boilerplate",
-  "description": "This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.",
+  "name": "gym-stats",
+  "description": "A comprehensive gym workout analytics dashboard with activity calendar and charts.",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "author": {
-    "name": "João Paulo Moraes",
-    "email": "joaopaulomoraes@outlook.com",
-    "url": "https://github.com/joaopaulomoraes"
-  },
-  "bugs": {
-    "url": "https://github.com/joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate/issues",
-    "email": "joaopaulomoraes@outlook.com"
+    "name": "wilmxre",
+    "email": "leslie.wilmore00@gmail.com"
   },
   "scripts": {
     "dev": "vite",
