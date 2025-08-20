@@ -55,6 +55,9 @@ export const MonthlyVolumeChart: React.FC<MonthlyVolumeChartProps> = ({
         font: {
           size: 16,
           weight: 'bold' as const
+        },
+        padding: {
+          bottom: 24
         }
       },
       tooltip: {

@@ -53,6 +53,9 @@ export const TimePreferenceChart: React.FC<TimePreferenceChartProps> = ({
         font: {
           size: 16,
           weight: 'bold' as const
+        },
+        padding: {
+          bottom: 24
         }
       },
       tooltip: {

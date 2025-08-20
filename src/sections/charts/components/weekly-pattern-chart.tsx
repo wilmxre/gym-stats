@@ -49,6 +49,9 @@ export const WeeklyPatternChart: React.FC<WeeklyPatternChartProps> = ({
         font: {
           size: 16,
           weight: 'bold' as const
+        },
+        padding: {
+          bottom: 24
         }
       },
       tooltip: {
