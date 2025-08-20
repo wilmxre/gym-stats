@@ -1,6 +1,5 @@
 import { UserMenu } from '@/components/ui/user-menu'
-import { ActivityCalendar } from '../sections/activity-calendar'
-import { Charts } from '../sections/charts'
+import { ActivityCalendar, Charts } from '@/sections'
 
 export const Sandbox = () => {
   return (
