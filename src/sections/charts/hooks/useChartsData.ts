@@ -1,16 +1,27 @@
-import { format, getDay, getHours, parse } from 'date-fns'
-import { useMemo } from 'react'
+import {
+  format,
+  getDay,
+  getHours,
+  parse,
+  startOfYear,
+  subMonths
+} from 'date-fns'
+import { useMemo, useState } from 'react'
 import { useAllCheckins } from '../../../hooks/useAllCheckins'
 import {
-  ChartData,
   LocationData,
   MonthlyVolumeData,
+  TimePeriod,
   TimePreferenceData,
   WeeklyPatternData
 } from '../types'
 
-export const useChartsData = (): ChartData => {
+export const useChartsData = () => {
   const { allCheckins, isLoading } = useAllCheckins()
+  const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>({
+    type: 'all',
+    label: 'All Time'
+  })
 
   return useMemo(() => {
     if (isLoading || !allCheckins.length) {
@@ -18,8 +29,78 @@ export const useChartsData = (): ChartData => {
         weeklyPattern: [],
         timePreferences: [],
         locationPreferences: [],
-        monthlyVolume: []
+        monthlyVolume: [],
+        availablePeriods: [],
+        selectedPeriod,
+        setSelectedPeriod
       }
+    }
+
+    // Generate available periods based on data
+    const years = [
+      ...new Set(
+        allCheckins.map((checkin) =>
+          new Date(checkin.date_checkin).getFullYear()
+        )
+      )
+    ].sort((a, b) => b - a) // Most recent first
+
+    const currentYear = new Date().getFullYear()
+    let availablePeriods: TimePeriod[] = [
+      { type: 'all', label: 'All Time' },
+      { type: 'last6months', label: 'Last 6 Months' },
+      { type: 'thisYear', label: currentYear.toString() }
+    ]
+
+    // Add specific years (excluding current year since we have current year above)
+    years.forEach((year) => {
+      if (year !== currentYear) {
+        availablePeriods.push({
+          type: 'specificYear',
+          label: year.toString(),
+          year
+        })
+      }
+    })
+
+    // Reverse the order so most recent periods come first (keeping "All Time" first)
+    availablePeriods = [
+      availablePeriods[0], // "All Time" stays first
+      ...availablePeriods.slice(1).reverse() // Reverse the rest
+    ]
+
+    // Filter data based on selected period
+    const now = new Date()
+    let filteredCheckins = allCheckins
+
+    switch (selectedPeriod.type) {
+      case 'last6months': {
+        const sixMonthsAgo = subMonths(now, 6)
+        filteredCheckins = allCheckins.filter(
+          (checkin) => new Date(checkin.date_checkin) >= sixMonthsAgo
+        )
+        break
+      }
+      case 'thisYear': {
+        const startOfThisYear = startOfYear(now)
+        filteredCheckins = allCheckins.filter(
+          (checkin) => new Date(checkin.date_checkin) >= startOfThisYear
+        )
+        break
+      }
+      case 'specificYear':
+        if (selectedPeriod.year) {
+          filteredCheckins = allCheckins.filter(
+            (checkin) =>
+              new Date(checkin.date_checkin).getFullYear() ===
+              selectedPeriod.year
+          )
+        }
+        break
+      case 'all':
+      default:
+        filteredCheckins = allCheckins
+        break
     }
     // Weekly Pattern Analysis
     const weeklyPatternMap = new Map<string, number>()
@@ -36,7 +117,7 @@ export const useChartsData = (): ChartData => {
     // Initialize all days
     dayNames.forEach((day) => weeklyPatternMap.set(day, 0))
 
-    allCheckins.forEach((checkin) => {
+    filteredCheckins.forEach((checkin) => {
       const date = new Date(checkin.date_checkin)
       const dayOfWeek = getDay(date)
       const dayName = dayNames[dayOfWeek]
@@ -52,18 +133,17 @@ export const useChartsData = (): ChartData => {
 
     // Time Preferences Analysis
     const timeSlots = [
-      { label: 'Early Morning (5-8 AM)', start: 5, end: 8 },
+      { label: 'Early Morning (6-8 AM)', start: 6, end: 8 },
       { label: 'Morning (8-11 AM)', start: 8, end: 11 },
-      { label: 'Midday (11 AM-2 PM)', start: 11, end: 14 },
-      { label: 'Afternoon (2-5 PM)', start: 14, end: 17 },
-      { label: 'Evening (5-8 PM)', start: 17, end: 20 },
+      { label: 'Afternoon (11-3 PM)', start: 11, end: 15 },
+      { label: 'Evening (3-8 PM)', start: 15, end: 20 },
       { label: 'Night (8-11 PM)', start: 20, end: 23 }
     ]
 
     const timePreferenceMap = new Map<string, number>()
     timeSlots.forEach((slot) => timePreferenceMap.set(slot.label, 0))
 
-    allCheckins.forEach((checkin) => {
+    filteredCheckins.forEach((checkin) => {
       // Extract time from date_checkin which might include time
       const dateTimeStr = checkin.date_checkin
       let hour = 12 // Default to noon if no time info
@@ -107,7 +187,7 @@ export const useChartsData = (): ChartData => {
 
     // Location Preferences
     const locationMap = new Map<string, number>()
-    allCheckins.forEach((checkin) => {
+    filteredCheckins.forEach((checkin) => {
       if (checkin.club_name) {
         locationMap.set(
           checkin.club_name,
@@ -116,7 +196,7 @@ export const useChartsData = (): ChartData => {
       }
     })
 
-    const totalCheckins = allCheckins.length
+    const totalCheckins = filteredCheckins.length
     const locationPreferences: LocationData[] = Array.from(
       locationMap.entries()
     ).map(([location, count]) => ({
@@ -127,7 +207,7 @@ export const useChartsData = (): ChartData => {
 
     // Monthly Volume
     const monthlyMap = new Map<string, number>()
-    allCheckins.forEach((checkin) => {
+    filteredCheckins.forEach((checkin) => {
       const date = new Date(checkin.date_checkin)
       const monthKey = format(date, 'yyyy-MM')
       monthlyMap.set(monthKey, (monthlyMap.get(monthKey) || 0) + 1)
@@ -151,7 +231,10 @@ export const useChartsData = (): ChartData => {
       weeklyPattern,
       timePreferences,
       locationPreferences,
-      monthlyVolume
+      monthlyVolume,
+      availablePeriods,
+      selectedPeriod,
+      setSelectedPeriod
     }
-  }, [allCheckins, isLoading])
+  }, [allCheckins, isLoading, selectedPeriod])
 }

@@ -21,9 +21,18 @@ export interface MonthlyVolumeData {
   year: number
 }
 
+export type TimePeriodType = 'all' | 'last6months' | 'thisYear' | 'specificYear'
+
+export interface TimePeriod {
+  type: TimePeriodType
+  label: string
+  year?: number
+}
+
 export interface ChartData {
   weeklyPattern: WeeklyPatternData[]
   timePreferences: TimePreferenceData[]
   locationPreferences: LocationData[]
   monthlyVolume: MonthlyVolumeData[]
+  availablePeriods: TimePeriod[]
 }
