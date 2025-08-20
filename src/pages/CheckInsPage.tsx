@@ -15,11 +15,11 @@ export const CheckInsPage = () => {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold text-text-50">Check-ins History</h1>
           <Button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/')}
             variant="outline"
             className="border-secondary-600 text-text-200 hover:bg-secondary-800"
           >
-            ← Back to Dashboard
+            ← Back to Home
           </Button>
         </div>
 

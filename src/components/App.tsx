@@ -8,8 +8,11 @@ import { Homepage, LoginPage } from '../pages'
 import { ProtectedRoute, PublicRoute } from './ProtectedRoute'
 
 const App = () => {
+  // Use basename only in production (GitHub Pages)
+  const basename = import.meta.env.PROD ? '/gym-stats' : ''
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route
           path="/login"
