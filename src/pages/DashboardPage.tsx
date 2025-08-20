@@ -1,6 +1,5 @@
 import { Toaster } from 'react-hot-toast'
 import { HeroKPIDashboard } from '../analytics'
-import { ThemeSwitch } from '../components/ui/theme-switch'
 import { UserMenu } from '../components/ui/user-menu'
 import { useAuth } from '../hooks/useAuth'
 
@@ -14,7 +13,6 @@ export const DashboardPage = () => {
   return (
     <div className="min-h-screen bg-background-950 p-4 relative">
       <span className="fixed top-8 right-8 z-50 flex items-center gap-2">
-        <ThemeSwitch />
         <UserMenu />
       </span>
 
