@@ -1,5 +1,6 @@
 import { UserMenu } from '@/components/ui/user-menu'
 import { ActivityCalendar } from '../sections/activity-calendar'
+import { Charts } from '../sections/charts'
 
 export const Sandbox = () => {
   return (
@@ -8,8 +9,9 @@ export const Sandbox = () => {
         <UserMenu />
       </span>
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto space-y-12">
         <ActivityCalendar />
+        <Charts />
       </div>
     </div>
   )

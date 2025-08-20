@@ -1,7 +1,6 @@
 import { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../components/ui/button'
-import { ThemeSwitch } from '../components/ui/theme-switch'
 import { UserMenu } from '../components/ui/user-menu'
 
 export const CheckInsPage = () => {
@@ -9,7 +8,6 @@ export const CheckInsPage = () => {
 
   return (
     <div className="min-h-screen p-4 relative pt-20">
-      <ThemeSwitch />
       <UserMenu />
 
       {/* Main Content */}

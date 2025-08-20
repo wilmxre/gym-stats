@@ -4,11 +4,10 @@ import {
   BrowserRouter as Router,
   Routes
 } from 'react-router-dom'
-import { ThemeContext, useThemeProvider } from '../hooks/useTheme'
 import { CheckInsPage, DashboardPage, LoginPage, Sandbox } from '../pages'
 import { ProtectedRoute, PublicRoute } from './ProtectedRoute'
 
-const AppContent = () => {
+const App = () => {
   return (
     <Router>
       <Routes>
@@ -48,16 +47,6 @@ const AppContent = () => {
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Router>
-  )
-}
-
-const App = () => {
-  const themeProvider = useThemeProvider()
-
-  return (
-    <ThemeContext.Provider value={themeProvider}>
-      <AppContent />
-    </ThemeContext.Provider>
   )
 }
 
