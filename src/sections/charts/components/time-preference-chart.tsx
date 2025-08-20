@@ -23,9 +23,7 @@ export const TimePreferenceChart: React.FC<TimePreferenceChartProps> = ({
   const sortedData = [...data].sort((a, b) => a.hour - b.hour)
 
   const chartData = {
-    labels: sortedData.map(
-      (item) => item.timeSlot.split(' ')[0] + ' ' + item.timeSlot.split(' ')[1]
-    ),
+    labels: sortedData.map((item) => item.timeSlot),
     datasets: [
       {
         label: 'Workout Sessions',

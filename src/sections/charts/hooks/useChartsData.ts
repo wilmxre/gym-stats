@@ -133,11 +133,10 @@ export const useChartsData = () => {
 
     // Time Preferences Analysis
     const timeSlots = [
-      { label: 'Early Morning (6-8 AM)', start: 6, end: 8 },
-      { label: 'Morning (8-11 AM)', start: 8, end: 11 },
-      { label: 'Afternoon (11-3 PM)', start: 11, end: 15 },
-      { label: 'Evening (3-8 PM)', start: 15, end: 20 },
-      { label: 'Night (8-11 PM)', start: 20, end: 23 }
+      { label: 'Morning (6-12 AM)', start: 6, end: 12 },
+      { label: 'Afternoon (12-5 PM)', start: 12, end: 17 },
+      { label: 'Evening (5-8 PM)', start: 17, end: 20 },
+      { label: 'Night Owl (8-10 PM)', start: 20, end: 22 }
     ]
 
     const timePreferenceMap = new Map<string, number>()
