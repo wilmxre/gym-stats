@@ -86,10 +86,12 @@ This project is configured for easy deployment to GitHub Pages.
 The project includes a GitHub Actions workflow that automatically deploys to GitHub Pages when you push to the main/master branch.
 
 1. **Enable GitHub Pages** in your repository settings:
+
    - Go to Settings > Pages
    - Select "GitHub Actions" as the source
 
 2. **Push your code** to the main/master branch:
+
    ```bash
    git push origin main
    ```
@@ -109,6 +111,7 @@ npm run deploy
 ### Configuration
 
 The project is pre-configured with:
+
 - **Base URL**: `/gym-stats/` (for GitHub Pages)
 - **Build Output**: `dist/` directory
 - **GitHub Actions**: Automated workflow for deployment
