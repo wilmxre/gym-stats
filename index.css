@@ -137,8 +137,10 @@
 }
 
 .mesh-gradient-bg {
-  background-image: url('./src/assets/twotone.jpg');
-  background-repeat: no-repeat;
+  background-image: url('./src/assets/mesh-bg.webp');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
 }

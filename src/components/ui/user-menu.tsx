@@ -27,7 +27,7 @@ export const UserMenu = () => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="bg-background-900/30 backdrop-blur-md border border-accent-300/30 shadow-lg rounded-xl hover:bg-background-700/30"
+        className="bg-background-900/40 backdrop-blur-md border border-accent-300/30 shadow-lg rounded-xl hover:bg-background-700/30"
         aria-label="User menu"
       >
         <Menu className="h-5 w-5 text-primary-100" />
