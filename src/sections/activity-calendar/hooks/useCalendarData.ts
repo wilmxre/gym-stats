@@ -1,6 +1,6 @@
 import { eachDayOfInterval, endOfYear, format, startOfYear } from 'date-fns'
 import { useMemo, useState } from 'react'
-import { useAllCheckins } from '../../../hooks/useAllCheckins'
+import { useCheckins } from '../../../contexts/CheckinsContext'
 import { HeatmapData } from '../types'
 
 const calculateStats = (heatmapData: HeatmapData[]) => {
@@ -36,7 +36,7 @@ const calculateStats = (heatmapData: HeatmapData[]) => {
 }
 
 export const useCalendarData = () => {
-  const { allCheckins, isLoading } = useAllCheckins()
+  const { allCheckins, isLoading } = useCheckins()
 
   const [selectedYear, setSelectedYear] = useState<number>(
     new Date().getFullYear()

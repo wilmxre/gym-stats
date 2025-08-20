@@ -1,6 +1,7 @@
 import { Toaster } from 'react-hot-toast'
 import { HeroKPIDashboard } from '../analytics'
 import { UserMenu } from '../components/ui/user-menu'
+import { CheckinsProvider } from '../contexts/CheckinsContext'
 import { useAuth } from '../hooks/useAuth'
 
 export const DashboardPage = () => {
@@ -27,9 +28,11 @@ export const DashboardPage = () => {
         }}
       />
 
-      <div className="max-w-7xl mx-auto pt-20">
-        <HeroKPIDashboard />
-      </div>
+      <CheckinsProvider>
+        <div className="max-w-7xl mx-auto pt-20">
+          <HeroKPIDashboard />
+        </div>
+      </CheckinsProvider>
     </div>
   )
 }

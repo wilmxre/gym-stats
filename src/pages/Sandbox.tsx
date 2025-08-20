@@ -1,5 +1,6 @@
 import { UserMenu } from '@/components/ui/user-menu'
 import { ActivityCalendar, Charts } from '@/sections'
+import { CheckinsProvider } from '../contexts/CheckinsContext'
 
 export const Sandbox = () => {
   return (
@@ -8,10 +9,12 @@ export const Sandbox = () => {
         <UserMenu />
       </span>
 
-      <div className="max-w-6xl mx-auto space-y-12">
-        <ActivityCalendar />
-        <Charts />
-      </div>
+      <CheckinsProvider>
+        <div className="max-w-6xl mx-auto space-y-12">
+          <ActivityCalendar />
+          <Charts />
+        </div>
+      </CheckinsProvider>
     </div>
   )
 }

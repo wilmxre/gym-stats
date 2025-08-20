@@ -7,7 +7,7 @@ import {
   subMonths
 } from 'date-fns'
 import { useMemo, useState } from 'react'
-import { useAllCheckins } from '../../../hooks/useAllCheckins'
+import { useCheckins } from '../../../contexts/CheckinsContext'
 import {
   LocationData,
   MonthlyVolumeData,
@@ -17,7 +17,7 @@ import {
 } from '../types'
 
 export const useChartsData = () => {
-  const { allCheckins, isLoading } = useAllCheckins()
+  const { allCheckins, isLoading } = useCheckins()
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>({
     type: 'all',
     label: 'All Time'

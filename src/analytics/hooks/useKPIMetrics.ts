@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useAllCheckins } from '../../hooks/useAllCheckins'
+import { useCheckins } from '../../contexts/CheckinsContext'
 import { KPIMetrics } from '../types'
 import { calculateKPIMetrics } from '../utils/kpiCalculations'
 
@@ -11,7 +11,7 @@ export const useKPIMetrics = (): {
   isLoading: boolean
   hasData: boolean
 } => {
-  const { allCheckins, isLoading } = useAllCheckins()
+  const { allCheckins, isLoading } = useCheckins()
 
   const metrics = useMemo(() => {
     return calculateKPIMetrics(allCheckins)
