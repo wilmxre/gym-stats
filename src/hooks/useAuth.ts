@@ -64,7 +64,7 @@ export const useAuth = () => {
 
         setUserInfo(result.member)
         toast.success(`Welcome back, ${result.member.fname}!`)
-        navigate('/sandbox')
+        navigate('/')
       } else {
         toast.error(result.error || 'Login failed')
       }

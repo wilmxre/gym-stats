@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Routes
 } from 'react-router-dom'
-import { CheckInsPage, DashboardPage, LoginPage, Sandbox } from '../pages'
+import { Homepage, LoginPage } from '../pages'
 import { ProtectedRoute, PublicRoute } from './ProtectedRoute'
 
 const App = () => {
@@ -20,31 +20,14 @@ const App = () => {
           }
         />
         <Route
-          path="/sandbox"
+          path="/"
           element={
             <ProtectedRoute>
-              <Sandbox />
+              <Homepage />
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/checkins"
-          element={
-            <ProtectedRoute>
-              <CheckInsPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   )

@@ -1,4 +1,2 @@
-export { CheckInsPage } from './CheckInsPage'
-export { DashboardPage } from './DashboardPage'
+export { Homepage } from './Homepage'
 export { LoginPage } from './LoginPage'
-export { Sandbox } from './Sandbox'
