@@ -1,3 +1,4 @@
+export { ActivityCalendarSkeleton } from './ActivityCalendarSkeleton'
 export { CalendarGrid } from './calendar-grid'
 export { BinaryLegend } from './legend'
 export { StatCard } from './stat-card'
