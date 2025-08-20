@@ -20,6 +20,12 @@ interface MonthlyVolumeChartProps {
 export const MonthlyVolumeChart: React.FC<MonthlyVolumeChartProps> = ({
   data
 }) => {
+  // Calculate dynamic width based on number of months
+  // Give more space per month when there are many months
+  const minBarWidth = 40 // Minimum width per bar
+  const calculatedWidth = Math.max(600, data.length * minBarWidth) // Minimum 600px or 40px per month
+  const needsScroll = data.length > 12 // More than 12 months needs scrolling
+
   const chartData = {
     labels: data.map((item) => item.month),
     datasets: [
@@ -73,7 +79,8 @@ export const MonthlyVolumeChart: React.FC<MonthlyVolumeChartProps> = ({
         },
         ticks: {
           color: '#cbd5e1',
-          maxRotation: 45
+          maxRotation: needsScroll ? 45 : 45,
+          minRotation: needsScroll ? 45 : 0
         }
       },
       y: {
@@ -91,7 +98,15 @@ export const MonthlyVolumeChart: React.FC<MonthlyVolumeChartProps> = ({
 
   return (
     <div className="h-80">
-      <Bar data={chartData} options={options} />
+      {needsScroll ? (
+        <div className="h-full overflow-x-auto">
+          <div style={{ width: `${calculatedWidth}px`, height: '100%' }}>
+            <Bar data={chartData} options={options} />
+          </div>
+        </div>
+      ) : (
+        <Bar data={chartData} options={options} />
+      )}
     </div>
   )
 }

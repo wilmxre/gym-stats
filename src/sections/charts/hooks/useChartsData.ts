@@ -207,11 +207,36 @@ export const useChartsData = () => {
 
     // Monthly Volume
     const monthlyMap = new Map<string, number>()
+
+    // First, populate with actual check-in data
     filteredCheckins.forEach((checkin) => {
       const date = new Date(checkin.date_checkin)
       const monthKey = format(date, 'yyyy-MM')
       monthlyMap.set(monthKey, (monthlyMap.get(monthKey) || 0) + 1)
     })
+
+    // For "All Time" view, fill in missing months with 0 to show complete timeline
+    if (selectedPeriod.type === 'all' && filteredCheckins.length > 0) {
+      const allDates = filteredCheckins.map(
+        (checkin) => new Date(checkin.date_checkin)
+      )
+      const minDate = new Date(Math.min(...allDates.map((d) => d.getTime())))
+      const maxDate = new Date() // Current date
+
+      // Generate all months from min to max date
+      const currentMonth = new Date(
+        minDate.getFullYear(),
+        minDate.getMonth(),
+        1
+      )
+      while (currentMonth <= maxDate) {
+        const monthKey = format(currentMonth, 'yyyy-MM')
+        if (!monthlyMap.has(monthKey)) {
+          monthlyMap.set(monthKey, 0)
+        }
+        currentMonth.setMonth(currentMonth.getMonth() + 1)
+      }
+    }
 
     const monthlyVolume: MonthlyVolumeData[] = Array.from(monthlyMap.entries())
       .map(([monthKey, count]) => {
@@ -225,7 +250,20 @@ export const useChartsData = () => {
           year: parseInt(year)
         }
       })
-      .sort((a, b) => a.year - b.year || a.month.localeCompare(b.month))
+      .sort((a, b) => {
+        // Sort by year first, then by month
+        if (a.year !== b.year) return a.year - b.year
+        // Extract month number for proper sorting
+        const monthA = new Date(
+          a.year,
+          new Date(`${a.month} 1, ${a.year}`).getMonth()
+        ).getMonth()
+        const monthB = new Date(
+          b.year,
+          new Date(`${b.month} 1, ${b.year}`).getMonth()
+        ).getMonth()
+        return monthA - monthB
+      })
 
     return {
       weeklyPattern,
