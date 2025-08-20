@@ -2,10 +2,28 @@ import {
   Navigate,
   Route,
   BrowserRouter as Router,
-  Routes
+  Routes,
+  useNavigate
 } from 'react-router-dom'
+import { useEffect } from 'react'
 import { Homepage, LoginPage } from '../pages'
 import { ProtectedRoute, PublicRoute } from './ProtectedRoute'
+
+const RedirectHandler = () => {
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    const redirectPath = sessionStorage.getItem('redirectPath')
+    if (redirectPath) {
+      sessionStorage.removeItem('redirectPath')
+      // Extract the path without the base
+      const path = redirectPath.replace('/gym-stats', '') || '/'
+      navigate(path, { replace: true })
+    }
+  }, [navigate])
+  
+  return null
+}
 
 const App = () => {
   // Use basename only in production (GitHub Pages)
@@ -13,6 +31,7 @@ const App = () => {
 
   return (
     <Router basename={basename}>
+      <RedirectHandler />
       <Routes>
         <Route
           path="/login"
