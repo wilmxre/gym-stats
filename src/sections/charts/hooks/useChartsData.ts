@@ -32,7 +32,8 @@ export const useChartsData = () => {
         monthlyVolume: [],
         availablePeriods: [],
         selectedPeriod,
-        setSelectedPeriod
+        setSelectedPeriod,
+        isLoading
       }
     }
 
@@ -270,7 +271,8 @@ export const useChartsData = () => {
       monthlyVolume,
       availablePeriods,
       selectedPeriod,
-      setSelectedPeriod
+      setSelectedPeriod,
+      isLoading
     }
   }, [allCheckins, isLoading, selectedPeriod])
 }

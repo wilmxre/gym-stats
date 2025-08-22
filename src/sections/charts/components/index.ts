@@ -1,3 +1,4 @@
+export { ChartsSkeleton } from './ChartsSkeleton'
 export { LocationPreferenceChart } from './location-preference-chart'
 export { MonthlyVolumeChart } from './monthly-volume-chart'
 export { TimePreferenceChart } from './time-preference-chart'

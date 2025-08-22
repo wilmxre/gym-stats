@@ -1,6 +1,7 @@
 import React from 'react'
 import { ToggleButton } from '../activity-calendar/components'
 import {
+  ChartsSkeleton,
   LocationPreferenceChart,
   MonthlyVolumeChart,
   TimePreferenceChart,
@@ -16,8 +17,13 @@ export const Charts: React.FC = () => {
     monthlyVolume,
     availablePeriods,
     selectedPeriod,
-    setSelectedPeriod
+    setSelectedPeriod,
+    isLoading
   } = useChartsData()
+
+  if (isLoading) {
+    return <ChartsSkeleton />
+  }
 
   return (
     <div className="space-y-8">
