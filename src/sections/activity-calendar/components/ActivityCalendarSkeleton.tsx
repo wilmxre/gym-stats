@@ -20,7 +20,7 @@ export const ActivityCalendarSkeleton: React.FC = () => {
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className="p-4 bg-black/20 backdrop-blur-md border border-accent-400 shadow-xl rounded-xl"
+            className="p-4 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl"
           >
             <div className="h-7 bg-primary-900/30 rounded w-16 mb-2"></div>
             <div className="h-4 bg-primary-900/30 rounded w-20"></div>
@@ -28,7 +28,7 @@ export const ActivityCalendarSkeleton: React.FC = () => {
         ))}
       </div>
 
-      <div className="p-6 py-7 bg-black/20 backdrop-blur-md border border-accent-400 shadow-xl rounded-xl">
+      <div className="p-6 py-7 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
         <div className="overflow-x-auto">
           <div className="space-y-2 min-w-[800px]">
             <div className="flex justify-between items-center h-4 mb-6 ml-12 pr-4">

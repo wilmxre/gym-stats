@@ -27,7 +27,7 @@ export const UserMenu = () => {
         variant="ghost"
         size="icon"
         onClick={toggleMenu}
-        className="bg-black/30 backdrop-blur-md border text-white border-accent-400 shadow-xl rounded-xl hover:bg-black/40 active:bg-black/40 focus-within:bg-black/40 focus:bg-black/40 focus-visible:bg-black/40"
+        className="bg-black/30 backdrop-blur-md border text-white border-accent-300 shadow-xl rounded-xl hover:bg-black/40 active:bg-black/40 focus-within:bg-black/40 focus:bg-black/40 focus-visible:bg-black/40"
         aria-label="User menu"
       >
         <Menu className="h-5 w-5 text-primary-100" />
@@ -40,7 +40,7 @@ export const UserMenu = () => {
             onClick={() => setIsOpen(false)}
           />
 
-          <Card className="fixed right-6 mt-2 z-50 w-80 bg-black/30 backdrop-blur-md border border-accent-400 shadow-xl">
+          <Card className="fixed right-6 mt-2 z-50 w-80 bg-black/30 backdrop-blur-md border border-accent-300 shadow-xl">
             <CardHeader className="text-center pb-4">
               <div className="w-16 h-16 bg-accent-600 rounded-full flex items-center justify-center mx-auto mb-3">
                 <span className="text-text-50 font-bold text-xl">

@@ -37,7 +37,7 @@ export const ActivityCalendar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex gap-1 bg-black/30 backdrop-blur-md border border-accent-400 shadow-xl rounded-xl p-1.5">
+          <div className="flex gap-1 bg-black/30 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl p-1.5">
             {availableYears.map((year) => (
               <ToggleButton
                 key={year}
@@ -58,7 +58,7 @@ export const ActivityCalendar: React.FC = () => {
         <StatCard value={stats.longestStreak} label="Longest streak" />
       </div>
 
-      <div className="p-6 bg-black/20 backdrop-blur-md border border-accent-400 shadow-xl rounded-xl">
+      <div className="p-6 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
         <div className="overflow-x-auto">
           <CalendarGrid heatmapData={heatmapData} dateRange={dateRange} />
         </div>
