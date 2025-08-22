@@ -1,5 +1,0 @@
-export { HeroKPIDashboard } from './components/HeroKPIDashboard'
-export { KPICard } from './components/KPICard'
-export { Sparkline } from './components/Sparkline'
-export { useKPIMetrics } from './hooks/useKPIMetrics'
-export type { KPIMetrics } from './types'

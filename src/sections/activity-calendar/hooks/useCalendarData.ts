@@ -13,12 +13,33 @@ const calculateStats = (heatmapData: HeatmapData[]) => {
   let longestStreak = 0
   let currentStreak = 0
 
-  // Calculate active streak from the end (most recent days)
-  for (let i = heatmapData.length - 1; i >= 0; i--) {
-    if (heatmapData[i].hasVisit) {
-      activeStreak++
-    } else {
-      break
+  // Get today's date in YYYY-MM-DD format
+  const today = format(new Date(), 'yyyy-MM-dd')
+  const yesterday = format(
+    new Date(Date.now() - 24 * 60 * 60 * 1000),
+    'yyyy-MM-dd'
+  )
+  
+  // Find today's and yesterday's index in the heatmap data
+  const todayIndex = heatmapData.findIndex((day) => day.date === today)
+  const yesterdayIndex = heatmapData.findIndex((day) => day.date === yesterday)
+  
+  // Calculate active streak from today backwards
+  // Start from today if there's a visit today, otherwise start from yesterday if there's a visit yesterday
+  let startIndex = -1
+  if (todayIndex !== -1 && heatmapData[todayIndex].hasVisit) {
+    startIndex = todayIndex
+  } else if (yesterdayIndex !== -1 && heatmapData[yesterdayIndex].hasVisit) {
+    startIndex = yesterdayIndex
+  }
+  
+  if (startIndex !== -1) {
+    for (let i = startIndex; i >= 0; i--) {
+      if (heatmapData[i].hasVisit) {
+        activeStreak++
+      } else {
+        break
+      }
     }
   }
 
