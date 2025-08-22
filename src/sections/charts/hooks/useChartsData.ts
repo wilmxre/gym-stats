@@ -19,8 +19,8 @@ import {
 export const useChartsData = () => {
   const { allCheckins, isLoading } = useCheckins()
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>({
-    type: 'all',
-    label: 'All Time'
+    type: 'thisYear',
+    label: new Date().getFullYear().toString()
   })
 
   return useMemo(() => {
@@ -48,7 +48,6 @@ export const useChartsData = () => {
     const currentYear = new Date().getFullYear()
     let availablePeriods: TimePeriod[] = [
       { type: 'all', label: 'All Time' },
-      { type: 'last6months', label: 'Last 6 Months' },
       { type: 'thisYear', label: currentYear.toString() }
     ]
 

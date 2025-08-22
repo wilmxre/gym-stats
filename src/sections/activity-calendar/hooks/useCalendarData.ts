@@ -19,11 +19,11 @@ const calculateStats = (heatmapData: HeatmapData[]) => {
     new Date(Date.now() - 24 * 60 * 60 * 1000),
     'yyyy-MM-dd'
   )
-  
+
   // Find today's and yesterday's index in the heatmap data
   const todayIndex = heatmapData.findIndex((day) => day.date === today)
   const yesterdayIndex = heatmapData.findIndex((day) => day.date === yesterday)
-  
+
   // Calculate active streak from today backwards
   // Start from today if there's a visit today, otherwise start from yesterday if there's a visit yesterday
   let startIndex = -1
@@ -32,7 +32,7 @@ const calculateStats = (heatmapData: HeatmapData[]) => {
   } else if (yesterdayIndex !== -1 && heatmapData[yesterdayIndex].hasVisit) {
     startIndex = yesterdayIndex
   }
-  
+
   if (startIndex !== -1) {
     for (let i = startIndex; i >= 0; i--) {
       if (heatmapData[i].hasVisit) {
@@ -59,9 +59,7 @@ const calculateStats = (heatmapData: HeatmapData[]) => {
 export const useCalendarData = () => {
   const { allCheckins, isLoading } = useCheckins()
 
-  const [selectedYear, setSelectedYear] = useState<number>(
-    new Date().getFullYear()
-  )
+  const [selectedYear, setSelectedYear] = useState<number>(2025)
 
   const { heatmapData, dateRange, stats, availableYears } = useMemo(() => {
     if (!allCheckins.length) {
