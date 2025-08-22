@@ -144,3 +144,9 @@
   background-attachment: fixed;
   min-height: 100vh;
 }
+
+@media (max-width: 768px) {
+  .mesh-gradient-bg {
+    background-image: url('./src/assets/mesh-bg-mobile.webp');
+  }
+}

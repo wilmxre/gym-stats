@@ -31,17 +31,15 @@ export const LoginPage = () => {
         }}
       />
 
-      <Card className="w-full max-w-md p-6 bg-background-900/40 backdrop-blur-md border border-accent-300/30 shadow-lg rounded-xl">
+      <Card className="w-full mx-4 max-w-md p-6 bg-black/30 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
         <CardHeader className="text-center pb-6">
-          <CardTitle className="text-3xl font-bold text-text-50">
-            Login
-          </CardTitle>
+          <CardTitle className="text-3xl font-bold text-white">Login</CardTitle>
         </CardHeader>
 
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-text-50 font-medium">
+              <Label htmlFor="email" className="text-white font-medium">
                 Email Address
               </Label>
               <Input
@@ -56,7 +54,7 @@ export const LoginPage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="pincode" className="text-text-50 font-medium">
+              <Label htmlFor="pincode" className="text-white font-medium">
                 PIN Code
               </Label>
               <Input
@@ -80,7 +78,7 @@ export const LoginPage = () => {
               />
               <Label
                 htmlFor="remember"
-                className="text-sm text-text-50 cursor-pointer"
+                className="text-sm font-normal text-white cursor-pointer"
               >
                 Remember my credentials
               </Label>

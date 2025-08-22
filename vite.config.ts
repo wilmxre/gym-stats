@@ -7,6 +7,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig(({ command }) => ({
   plugins: [react(), tsconfigPaths()],
   base: command === 'build' ? '/gym-stats/' : '/',
+  server: {
+    allowedHosts: ['1c44afcb0c6b.ngrok-free.app']
+  },
   test: {
     globals: true,
     environment: 'happy-dom',
