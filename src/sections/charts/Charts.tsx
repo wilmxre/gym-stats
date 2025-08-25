@@ -38,7 +38,7 @@ export const Charts: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 justify-end sm:justify-start">
           <div className="flex gap-1 bg-black/30 backdrop-blur-md shadow-xl rounded-xl p-1.5">
             {availablePeriods.map((period) => (
               <ToggleButton

@@ -9,7 +9,7 @@ export const ChartsSkeleton: React.FC = () => {
           <div className="h-8 bg-primary-900/30 rounded w-48 mb-2"></div>
           <div className="h-5 bg-primary-900/30 rounded w-64"></div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 justify-end sm:justify-start">
           <div className="flex gap-2 bg-background-900/50 backdrop-blur-md shadow-lg rounded-xl p-1.5 h-[48px]">
             <div className="w-14 bg-transparent"></div>
             <div className="h-[32px] w-14 self-center bg-primary-900/30 rounded-lg"></div>
