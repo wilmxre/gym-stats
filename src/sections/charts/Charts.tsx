@@ -39,7 +39,7 @@ export const Charts: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex gap-1 bg-black/30 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl p-1.5">
+          <div className="flex gap-1 bg-black/30 backdrop-blur-md shadow-xl rounded-xl p-1.5">
             {availablePeriods.map((period) => (
               <ToggleButton
                 key={`${period.type}-${period.year || 'default'}`}
@@ -57,19 +57,19 @@ export const Charts: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="p-6 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
+        <div className="p-6 bg-black/20 backdrop-blur-md shadow-xl rounded-xl">
           <WeeklyPatternChart data={weeklyPattern} />
         </div>
 
-        <div className="p-6 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
+        <div className="p-6 bg-black/20 backdrop-blur-md shadow-xl rounded-xl">
           <TimePreferenceChart data={timePreferences} />
         </div>
 
-        <div className="p-6 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
+        <div className="p-6 bg-black/20 backdrop-blur-md shadow-xl rounded-xl">
           <LocationPreferenceChart data={locationPreferences} />
         </div>
 
-        <div className="p-6 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
+        <div className="p-6 bg-black/20 backdrop-blur-md shadow-xl rounded-xl">
           <MonthlyVolumeChart data={monthlyVolume} />
         </div>
       </div>

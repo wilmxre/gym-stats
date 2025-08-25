@@ -31,7 +31,7 @@ export const LoginPage = () => {
         }}
       />
 
-      <Card className="w-full mx-4 max-w-md p-6 bg-black/30 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
+      <Card className="w-full mx-4 max-w-md p-6 bg-black/30 backdrop-blur-md shadow-xl rounded-xl">
         <CardHeader className="text-center pb-6">
           <CardTitle className="text-3xl font-bold text-white">Login</CardTitle>
         </CardHeader>
