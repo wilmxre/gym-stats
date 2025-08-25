@@ -27,6 +27,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
   heatmapData,
   dateRange
 }) => {
+  const today = format(new Date(), 'yyyy-MM-dd')
   const weeks: HeatmapData[][] = []
   let currentWeek: HeatmapData[] = []
 
@@ -113,23 +114,28 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
           }}
         >
           {weeks.map((week, weekIndex) =>
-            week.map((day, dayIndex) => (
-              <div
-                key={`${weekIndex}-${dayIndex}`}
-                className={clsx(
-                  'w-4 h-4 rounded-sm',
-                  day.hasVisit ? 'bg-accent-100' : 'bg-primary-900/20'
-                )}
-                title={
-                  day.date
-                    ? `${day.date}: ${day.count} ${
-                        day.count === 1 ? 'visit' : 'visits'
-                      }`
-                    : ''
-                }
-                style={{ gridColumn: weekIndex + 1, gridRow: dayIndex + 1 }}
-              />
-            ))
+            week.map((day, dayIndex) => {
+              const isToday = day.date === today
+              return (
+                <div
+                  key={`${weekIndex}-${dayIndex}`}
+                  className={clsx(
+                    'w-4 h-4 rounded-sm relative',
+                    day.hasVisit ? 'bg-[#ec4899]' : 'bg-primary-900/20',
+                    isToday &&
+                      'ring-1 ring-white-500 ring-offset-1 ring-offset-white-500'
+                  )}
+                  title={
+                    day.date
+                      ? `${day.date}${isToday ? ' (Today)' : ''}: ${
+                          day.count
+                        } ${day.count === 1 ? 'visit' : 'visits'}`
+                      : ''
+                  }
+                  style={{ gridColumn: weekIndex + 1, gridRow: dayIndex + 1 }}
+                />
+              )
+            })
           )}
         </div>
       </div>

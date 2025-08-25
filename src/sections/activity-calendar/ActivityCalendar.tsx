@@ -63,7 +63,7 @@ export const ActivityCalendar: React.FC = () => {
           <CalendarGrid heatmapData={heatmapData} dateRange={dateRange} />
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-4 gap-4 border-t border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-4 gap-4 border-t border-white/30">
           <div className="text-sm text-white/90">
             {format(dateRange.start, 'MMM d, yyyy')} -{' '}
             {format(dateRange.end, 'MMM d, yyyy')}
