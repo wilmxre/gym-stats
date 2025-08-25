@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { addDays, eachDayOfInterval, format, getDay, subDays } from 'date-fns'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { HeatmapData } from '../types'
 
 const monthOrder = [
@@ -21,13 +21,16 @@ const monthOrder = [
 interface CalendarGridProps {
   heatmapData: HeatmapData[]
   dateRange: { start: Date; end: Date }
+  selectedYear: number
 }
 
 export const CalendarGrid: React.FC<CalendarGridProps> = ({
   heatmapData,
-  dateRange
+  dateRange,
+  selectedYear
 }) => {
   const today = format(new Date(), 'yyyy-MM-dd')
+  const containerRef = useRef<HTMLDivElement>(null)
   const weeks: HeatmapData[][] = []
   let currentWeek: HeatmapData[] = []
 
@@ -77,8 +80,51 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
     }
   })
 
+  // Find current day's week position for scrolling
+  let todayWeekIndex = -1
+  weeks.forEach((week, weekIndex) => {
+    week.forEach((day) => {
+      if (day.date === today) {
+        todayWeekIndex = weekIndex
+      }
+    })
+  })
+
+  // Auto-scroll logic: current year -> today, previous years -> end
+  useEffect(() => {
+    if (containerRef.current) {
+      const scrollableContainer = containerRef.current.parentElement
+      if (
+        scrollableContainer &&
+        scrollableContainer.scrollWidth > scrollableContainer.clientWidth
+      ) {
+        const currentYear = new Date().getFullYear()
+        const weekWidth = 20 // Each week column is ~20px (w-4 + gap)
+        const viewportWidth = scrollableContainer.clientWidth
+        const padding = Math.min(viewportWidth * 0.2, 120) // 20% of viewport or max 120px
+
+        let scrollPosition = 0
+
+        if (selectedYear === currentYear && todayWeekIndex !== -1) {
+          // Current year: scroll to today with padding
+          scrollPosition = Math.max(0, todayWeekIndex * weekWidth - padding)
+        } else if (selectedYear < currentYear) {
+          // Previous years: scroll to the end
+          scrollPosition =
+            scrollableContainer.scrollWidth - scrollableContainer.clientWidth
+        }
+        // Future years: stay at start (scrollPosition = 0)
+
+        scrollableContainer.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        })
+      }
+    }
+  }, [todayWeekIndex, weeks.length, selectedYear])
+
   return (
-    <div className="space-y-2 min-w-[800px]">
+    <div ref={containerRef} className="space-y-2 min-w-[800px]">
       <div className="relative h-8 ml-12">
         {monthLabels.map(({ month, position }) => (
           <span

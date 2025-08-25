@@ -60,7 +60,11 @@ export const ActivityCalendar: React.FC = () => {
 
       <div className="p-6 bg-black/20 backdrop-blur-md border border-accent-300 shadow-xl rounded-xl">
         <div className="overflow-x-auto">
-          <CalendarGrid heatmapData={heatmapData} dateRange={dateRange} />
+          <CalendarGrid
+            heatmapData={heatmapData}
+            dateRange={dateRange}
+            selectedYear={selectedYear}
+          />
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-4 gap-4 border-t border-white/30">
